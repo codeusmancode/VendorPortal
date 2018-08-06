@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelSplitter id="ps1" orientation="vertical" splitterPosition="579">
+    <f:facet name="first">
+      <af:panelHeader text=" #{pageFlowScope.challan_number}" id="ph1">
+        <f:facet name="context">
+          <af:button text="Return" id="b1" action="return"/>
+        </f:facet>
+        <f:facet name="toolbar"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:treeTable value="#{bindings.VOChallanSummaryPOHeaders1.treeModel}" var="node"
+                      selectionListener="#{bindings.VOChallanSummaryPOHeaders1.treeModel.makeCurrent}"
+                      rowSelection="single" id="tt1">
+          <f:facet name="nodeStamp">
+            <af:column id="c1" headerText="Purchase Number">
+              <af:outputText value="#{node.PoNo}"  id="ot1"/>
+            </af:column>
+          </f:facet>
+          <f:facet name="pathStamp">
+            <af:outputText value="#{node}" id="ot2"/>
+          </f:facet>
+          <af:column id="c4" headerText="Operating Unit">
+            <af:outputText value="#{node.OperatingUnit}"  id="ot5"/>
+          </af:column>
+          <af:column id="c44" headerText="Total Quantity Consumed" width="60">
+            <af:outputText value="#{node.LineSum}" id="ot54"/>
+          </af:column>
+          <af:column id="c2" headerText="Consumed Line Qty" width="60">
+            <af:outputText value="#{node.SumQty}" id="ot3"/>
+          </af:column>
+          <af:column id="c25" headerText="Invalid Line Qty" width="60">
+            <af:outputText value="#{node.Invalid}" inlineStyle="color:#{node.Invalid gt 0 ? 'red' : ' '};" id="ot35"/>
+          </af:column>
+          <af:column id="c5" headerText="Bad" width="40">
+          <af:outputText value="#{node.BadQty}" inlineStyle="color:#{node.BadQty gt 0 and node.ReShipChallan != null ? 'green' : 'red'};" id="ot47"/>
+          </af:column>
+          <af:column id="c8" headerText="Missing" width="40">
+          <af:outputText value=" #{node.MissingQty} " inlineStyle="color:#{node.MissingQty gt 0 and node.ReShipChallan != null ? 'green' : 'red'};" id="ot487"/>
+          </af:column>
+          <af:column id="c9" headerText="Short" width="40">
+          <af:outputText value="#{node.ShortQty}" inlineStyle="color:#{node.ShortQty gt 0 and node.ReShipChallan != null ? 'green' : 'red'};" id="ot457"/>
+          </af:column>
+          <af:column id="c10" headerText="Return Type" width="50">
+          <af:outputText value="#{node.ReturnType}" id="ot447"/>
+          </af:column>
+          <af:column id="c11" headerText="Re Ship Challan" width="50">
+          <af:outputText value="#{node.ReShipChallan}" id="ot327"/>
+          </af:column>
+          <af:column id="c3" headerText="Line Number" width="40">
+            <af:outputText value="#{node.LineNum}" id="ot4"/>
+          </af:column>
+          <af:column id="c343" headerText="Item" width="600">
+            <af:outputText value="#{node.ItemDescription}" id="ot44"/>
+          </af:column>
+          
+        </af:treeTable>
+      </af:panelHeader>
+    </f:facet>
+    <f:facet name="second"/>
+  </af:panelSplitter>
+</ui:composition>

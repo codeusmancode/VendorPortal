@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="VOChallanSummaryPOLines"
+  Version="12.2.1.12.24"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  RowClass="com.usaparel.vpmodel.VO.VOChallanSummaryPOLinesRowImpl"
+  ComponentClass="com.usaparel.vpmodel.VO.VOChallanSummaryPOLinesImpl"
+  PageIterMode="Full"
+  FetchSize="6">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.usaparel.vpmodel.VO.VOChallanSummaryPOLines_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[select sum(csp.packing_qty) sum_qty,  
+       sum(nvl(csp.bad_qty,0)+nvl(csp.missing_qty,0)+nvl(csp.short_qty,0)) invalid, csp.po_line_id,csp.po_header_id,csp.delivery_challan_id,pla.line_num,    
+            pla.item_description        
+    from         
+        cust_shipment_delivery_challan sdc,        
+        cust_shipment_packing csp,    
+        po_lines_all pla        
+    where        
+    sdc.challan_id = csp.delivery_challan_id    
+    and pla.po_line_id = csp.po_line_id  
+    group by csp.po_line_id,csp.delivery_challan_id,csp.po_header_id,pla.line_num,pla.item_description]]></SQLQuery>
+  <ViewAttribute
+    Name="SumQty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SUM_QTY"
+    Expression="SUM_QTY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Invalid"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="INVALID"
+    Expression="INVALID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PoLineId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PO_LINE_ID"
+    Expression="PO_LINE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PoHeaderId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PO_HEADER_ID"
+    Expression="PO_HEADER_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="DeliveryChallanId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="DELIVERY_CHALLAN_ID"
+    Expression="DELIVERY_CHALLAN_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="LineNum"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="LINE_NUM"
+    Expression="LINE_NUM"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ItemDescription"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITEM_DESCRIPTION"
+    Expression="ITEM_DESCRIPTION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="PoLineId"/>
+    <Item Value="DeliveryChallanId"/>
+  </AttrArray>
+  <ViewLinkAccessor
+    Name="VOInvalidChallanQty"
+    ViewLink="com.usaparel.vpmodel.VO.VLSummaryDetailSummary"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.usaparel.vpmodel.VPModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

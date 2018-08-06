@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24" id="tf_login_tf_login_loginPageDef"
+                Package="com.usaparel.vpview.pageDefs" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator id="VOXXCustPoHeader1Iterator" Binds="VOXXCustPoHeader1" DataControl="AppModuleDataControl"
+              RangeSize="25"/>
+  </executables>
+  <bindings>
+    <methodAction id="login" RequiresUpdateModel="true" Action="invokeMethod" MethodName="login"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="bindings.login.dataControl.dataProvider"
+                  ReturnName="data.AppModuleDataControl.methodResults.login_login_dataControl_dataProvider_login_result">
+      <NamedData NDName="username" NDValue="#{pageFlowScope.username}" NDType="java.lang.String"/>
+      <NamedData NDName="password" NDValue="#{pageFlowScope.password}" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

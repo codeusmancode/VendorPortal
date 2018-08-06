@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <managed-bean id="__3">
+    <managed-bean-name>VendorPo</managed-bean-name>
+    <managed-bean-class>com.usaparel.vpview.managedbeans.VendorPo</managed-bean-class>
+    <managed-bean-scope>backingBean</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__1">
+    <managed-bean-name>SessionBean</managed-bean-name>
+    <managed-bean-class>com.usaparel.vpview.managedbeans.SessionHandler</managed-bean-class>
+    <managed-bean-scope>backingBean</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__2">
+    <managed-bean-name>TemplateActionBean</managed-bean-name>
+    <managed-bean-class>com.usaparel.vpview.helper.TeamplateActions</managed-bean-class>
+    <managed-bean-scope>backingBean</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__4">
+    <managed-bean-name>deletethis</managed-bean-name>
+    <managed-bean-class>com.usaparel.vpview.deletethis</managed-bean-class>
+    <managed-bean-scope>backingBean</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__5">
+    <managed-bean-name>F</managed-bean-name>
+    <managed-bean-class>com.usaparel.vpview.F</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+</adfc-config>

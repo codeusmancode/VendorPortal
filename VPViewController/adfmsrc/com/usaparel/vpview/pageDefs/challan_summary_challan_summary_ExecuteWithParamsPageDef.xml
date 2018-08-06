@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24"
+                id="challan_summary_challan_summary_ExecuteWithParamsPageDef" Package="com.usaparel.vpview.pageDefs"
+                SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="VOChallanSummaryPOHeaders1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="VOChallanSummaryPOHeaders1Iterator" Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="VOChallanSummaryPOHeaders1Iterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="challan_id" NDValue="#{pageFlowScope.challan_id}" NDType="oracle.jbo.domain.Number"/>
+    </action>
+  </bindings>
+</pageDefinition>

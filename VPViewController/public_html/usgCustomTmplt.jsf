@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<af:pageTemplateDef xmlns:af="http://xmlns.oracle.com/adf/faces/rich" var="attrs" definition="private"
+                    xmlns:afc="http://xmlns.oracle.com/adf/faces/rich/component" xmlns:f="http://java.sun.com/jsf/core">
+    <af:xmlContent>
+        <afc:component>
+            <afc:description/>
+            <afc:display-name>usgCustomTmplt</afc:display-name>
+            <afc:facet>
+                <afc:facet-name>content</afc:facet-name>
+            </afc:facet>
+        </afc:component>
+    </af:xmlContent>
+    <af:panelSplitter id="pt_ps1" orientation="vertical" splitterPosition="45" disabled="true"
+                      inlineStyle="background-color:white;">
+        <f:facet name="first">
+            <af:panelStretchLayout id="pt_psl1" inlineStyle='background-image:url("images/header.jpg");'
+                                   startWidth="250px" endWidth="300px">
+                <f:facet name="start">
+                    <af:panelGroupLayout id="pt_pgl3" layout="horizontal" valign="top">
+                        <af:image source="/images/logo.png" id="pt_i1"/>
+                        <af:outputText value="Vendor Portal" id="pt_ot1"
+                                       inlineStyle="font-size:x-large; color:white;margin-bottom:5px"/>
+                    </af:panelGroupLayout>
+                </f:facet>
+                <f:facet name="end">
+                    <af:panelGroupLayout id="pt_pgl1" layout="vertical" halign="right" valign="middle">
+                        <af:panelGroupLayout id="pt_pgl2" layout="horizontal" valign="bottom"
+                                             inlineStyle="text-align:center;">
+                            <af:outputText value="#{sessionScope.username}" id="pt_ot2"
+                                           inlineStyle="color:white; width:auto;"/>
+                            <af:spacer width="10" height="10" id="pt_s1"/>
+                            <af:spacer width="10" height="10" id="pt_s2"/>
+                        </af:panelGroupLayout>
+                    </af:panelGroupLayout>
+                </f:facet>
+                <f:facet name="center"/>
+            </af:panelStretchLayout>
+        </f:facet>
+        <f:facet name="second">
+            <af:facetRef facetName="content"/>
+        </f:facet>
+    </af:panelSplitter>
+    <!--oracle-jdev-comment:preferred-managed-bean-name:TemplateActionBean-->
+</af:pageTemplateDef>

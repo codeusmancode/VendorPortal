@@ -1,0 +1,16 @@
+//Groovy Scripts for com.usaparel.vpmodel.VO.VOXXCustShipmentPacking
+
+package com.usaparel.vpmodel.VO
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="TotalAccepted")
+def TotalAccepted_ExpressionScript_Expression()
+{
+if (Status == 'OKAY'){
+    return '1';
+}else{
+    return '0';
+}
+}
+

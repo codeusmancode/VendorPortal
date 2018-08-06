@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="VlShipLinesShipPacking"
+  Version="12.2.1.12.24"
+  InheritPersonalization="merge">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.usaparel.vpmodel.VlShipLinesShipPacking_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="VOXXCustShipmentLines"
+    Cardinality="1"
+    Source="true"
+    Owner="com.usaparel.vpmodel.VO.VOXXCustShipmentLines">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="VOXXCustShipmentLines"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.usaparel.vpmodel.VO.VOXXCustShipmentLines.ShipId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="VOXXCustShipmentPacking"
+    Cardinality="-1"
+    Owner="com.usaparel.vpmodel.VO.VOXXCustShipmentPacking">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="VOXXCustShipmentPacking"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.usaparel.vpmodel.VO.VOXXCustShipmentPacking.ShipId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.usaparel.vpmodel.VPModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

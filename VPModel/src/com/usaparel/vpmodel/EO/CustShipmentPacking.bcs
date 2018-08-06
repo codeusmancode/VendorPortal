@@ -1,0 +1,12 @@
+//Groovy Scripts for com.usaparel.vpmodel.EO.CustShipmentPacking
+
+package com.usaparel.vpmodel.EO
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="PackingId")
+def PackingId_ExpressionScript_Expression()
+{
+(new oracle.jbo.server.SequenceImpl("cust_ship_packing_S",adf.object.getDBTransaction())).getSequenceNumber()
+}
+

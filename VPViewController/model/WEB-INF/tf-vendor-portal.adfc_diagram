@@ -1,0 +1,74 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <Router
+      id="Router2">
+      <property
+         name="activityId">has_user_session</property>
+      <property
+         name="x">111.0</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>has_user_session&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Router&lt;/p></property>
+      <property
+         name="y">166.24707</property>
+      <property
+         name="exceptionHandler">false</property>
+   </Router>
+   <TaskFlowCall
+      id="TaskFlowCall3">
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>call_tf_login&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Call&lt;/p></property>
+      <property
+         name="activityId">call_tf_login</property>
+      <property
+         name="x">382.0</property>
+      <property
+         name="y">87.84473</property>
+      <property
+         name="documentReference">/WEB-INF/tf-login.xml</property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="taskFlowId">tf-login</property>
+   </TaskFlowCall>
+   <TaskFlowCall
+      id="TaskFlowCall4">
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>call_tf-vendorpo&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Call&lt;/p></property>
+      <property
+         name="activityId">call_tf-vendorpo</property>
+      <property
+         name="x">386.0</property>
+      <property
+         name="y">226.14355</property>
+      <property
+         name="documentReference">/WEB-INF/tf-vendorpo.xml</property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="taskFlowId">tf-vendorpo</property>
+   </TaskFlowCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase5"
+      from="Router2"
+      to="TaskFlowCall3">
+      <property
+         name="fromOutcome">no_session</property>
+      <property
+         name="sdm:polyPoints">R46,152.0,162.39648,341.0,87.49414,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase6"
+      from="Router2"
+      to="TaskFlowCall4">
+      <property
+         name="fromOutcome">has_session</property>
+      <property
+         name="sdm:polyPoints">R54,152.0,169.39648,345.0,225.79297,L50</property>
+   </ControlFlowCase>
+</SDM>

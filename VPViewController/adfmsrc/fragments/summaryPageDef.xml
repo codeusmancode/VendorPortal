@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24" id="summaryPageDef"
+                Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="VOChallanSummaryPOHeaders1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="VOChallanSummaryPOHeaders1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="VOChallanSummaryPOHeaders1Iterator" id="VOChallanSummaryPOHeaders1">
+      <nodeDefinition DefName="com.usaparel.vpmodel.VO.VOChallanSummaryPOHeaders" Name="VOChallanSummaryPOHeaders10">
+        <AttrNames>
+          <Item Value="PoNo"/>
+          <Item Value="OperatingUnit"/>
+          <Item Value="ApprovedDate"/>
+          <Item Value="LineSum"/>
+          <Item Value="PoHeaderId"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="VOChallanSummaryPOLines"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="com.usaparel.vpmodel.VO.VOChallanSummaryPOLines" Name="VOChallanSummaryPOHeaders11">
+        <AttrNames>
+          <Item Value="SumQty"/>
+          <Item Value="PoLineId"/>
+          <Item Value="LineNum"/>
+          <Item Value="ItemDescription"/>
+          <Item Value="Invalid"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="VOInvalidChallanQty"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="com.usaparel.vpmodel.VO.VOInvalidChallanQty" Name="VOChallanSummaryPOHeaders12">
+        <AttrNames>
+          <Item Value="ChallanId"/>
+          <Item Value="BadQty"/>
+          <Item Value="ChallanNumber"/>
+          <Item Value="ItemId"/>
+          <Item Value="MissingQty"/>
+          <Item Value="PackingId"/>
+          <Item Value="PackingQty"/>
+          <Item Value="PoHeaderId"/>
+          <Item Value="PoLineId"/>
+          <Item Value="ReturnType"/>
+          <Item Value="Segment1"/>
+          <Item Value="ShortQty"/>
+          <Item Value="TotalChallanQty"/>
+          <Item Value="UnitMeasLookupCode"/>
+          <Item Value="ReShipChallan"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

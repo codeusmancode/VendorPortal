@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="VOXXCustShipmentPacking"
+  Version="12.2.1.12.24"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  FetchSize="5"
+  FetchMode="FETCH_ALL">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <ViewAccessor
+    Name="AppModule_LOVChalans1_1"
+    ViewObjectName="com.usaparel.vpmodel.VO.LOVChalans"
+    AMUsageName="AppModule"
+    ViewInstanceName="LOVChalans1"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="AppModule_LOVMissingBox1_1"
+    ViewObjectName="com.usaparel.vpmodel.VO.LOVMissingBox"
+    AMUsageName="AppModule"
+    ViewInstanceName="LOVMissingBox1"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="pchid">
+        <TransientExpression
+          trustMode="untrusted"
+          Name="ExpressionScript"><![CDATA[ParentChallan]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_ParentChallanNumber"
+    ListVOName="AppModule_LOVChalans1_1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ParentChallanNumber"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="ParentChallan"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ChallanNumber"/>
+      <Item Value="ChallanId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ChallanNumber"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="LOVChalansCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ParentPackId"
+    ListVOName="AppModule_LOVMissingBox1_1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ParentPackId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="PackingId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Box"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery><![CDATA[SELECT CustShipmentPacking.PACKING_ID,                 
+CustShipmentPacking.parent_pack_id, 
+       CustShipmentPacking.SHIP_ID,                 
+       CustShipmentPacking.PACKING_LINE_NUM,                 
+       CustShipmentPacking.PACKING_QTY,                 
+       CustShipmentPacking.PACKING_DATE,                 
+       CustShipmentPacking.STATUS,                 
+       CustShipmentPacking.CREATED_BY,                 
+       CustShipmentPacking.CREATION_DATE,                 
+       CustShipmentPacking.LAST_UPDATED_BY,                 
+       CustShipmentPacking.LAST_UPDATE_DATE,                 
+       CustShipmentPacking.SCAN_DATE,                 
+       CustShipmentPacking.SCAN_LINE_ID,                 
+       CustShipmentPacking.SCAN_BY,                 
+       CustShipmentPacking.REJECT_DATE,                 
+       CustShipmentPacking.REJECT_BY,                 
+       CustShipmentPacking.REJECT_LINE_ID,                 
+       CustShipmentPacking.ORG_ID,                 
+       CustShipmentPacking.DELIVERY_CHALLAN_ID,                 
+       CustShipmentPacking.VERSION_NUMBER,                 
+       CustShipmentPacking.PO_LINE_ID,                 
+       CustShipmentPacking.PO_HEADER_ID,           
+       CustShipmentPacking.item_id,         
+       CustShipmentPacking.parent_challan,         
+       CustShipmentPacking.original_challan_qty,         
+       CustShipmentPacking.missing_qty,     
+       CustShipmentPacking.short_qty,     
+       CustShipmentPacking.bad_qty,     
+       pha.segment1 purchase_order_number,                
+       pla.line_num purchase_line_number,             
+       pla.item_description pack_item,   
+       dc.challan_number parent_challan_number           
+FROM  CUST_SHIPMENT_PACKING CustShipmentPacking,                
+      po_headers_all pha,                
+      po_lines_all pla,   
+      cust_shipment_delivery_challan dc                
+where CustShipmentPacking.PO_HEADER_ID = pha.po_header_id                
+and  CustShipmentPacking.PO_LINE_ID = pla.po_line_id   
+and dc.challan_id(+) = CustShipmentPacking.parent_challan]]></SQLQuery>
+  <EntityUsage
+    Name="CustShipmentPacking"
+    Entity="com.usaparel.vpmodel.EO.CustShipmentPacking"/>
+  <ViewAttribute
+    Name="PackingId"
+    PrecisionRule="true"
+    EntityAttrName="PackingId"
+    EntityUsage="CustShipmentPacking"
+    AliasName="PACKING_ID"/>
+  <ViewAttribute
+    Name="ParentPackId"
+    PrecisionRule="true"
+    EntityAttrName="ParentPackId"
+    EntityUsage="CustShipmentPacking"
+    AliasName="PARENT_PACK_ID"
+    LOVName="LOV_ParentPackId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShipId"
+    PrecisionRule="true"
+    EntityAttrName="ShipId"
+    EntityUsage="CustShipmentPacking"
+    AliasName="SHIP_ID"/>
+  <ViewAttribute
+    Name="PackingLineNum"
+    PrecisionRule="true"
+    EntityAttrName="PackingLineNum"
+    EntityUsage="CustShipmentPacking"
+    AliasName="PACKING_LINE_NUM"/>
+  <ViewAttribute
+    Name="PackingQty"
+    PrecisionRule="true"
+    EntityAttrName="PackingQty"
+    EntityUsage="CustShipmentPacking"
+    AliasName="PACKING_QTY"/>
+  <ViewAttribute
+    Name="PackingDate"
+    PrecisionRule="true"
+    EntityAttrName="PackingDate"
+    EntityUsage="CustShipmentPacking"
+    AliasName="PACKING_DATE"/>
+  <ViewAttribute
+    Name="Status"
+    PrecisionRule="true"
+    EntityAttrName="Status"
+    EntityUsage="CustShipmentPacking"
+    AliasName="STATUS"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="CustShipmentPacking"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="CreationDate"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="CustShipmentPacking"
+    AliasName="CREATION_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="CustShipmentPacking"
+    AliasName="LAST_UPDATED_BY"/>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateDate"
+    EntityUsage="CustShipmentPacking"
+    AliasName="LAST_UPDATE_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="ScanDate"
+    PrecisionRule="true"
+    EntityAttrName="ScanDate"
+    EntityUsage="CustShipmentPacking"
+    AliasName="SCAN_DATE"/>
+  <ViewAttribute
+    Name="ScanLineId"
+    PrecisionRule="true"
+    EntityAttrName="ScanLineId"
+    EntityUsage="CustShipmentPacking"
+    AliasName="SCAN_LINE_ID"/>
+  <ViewAttribute
+    Name="ScanBy"
+    PrecisionRule="true"
+    EntityAttrName="ScanBy"
+    EntityUsage="CustShipmentPacking"
+    AliasName="SCAN_BY"/>
+  <ViewAttribute
+    Name="RejectDate"
+    PrecisionRule="true"
+    EntityAttrName="RejectDate"
+    EntityUsage="CustShipmentPacking"
+    AliasName="REJECT_DATE"/>
+  <ViewAttribute
+    Name="RejectBy"
+    PrecisionRule="true"
+    EntityAttrName="RejectBy"
+    EntityUsage="CustShipmentPacking"
+    AliasName="REJECT_BY"/>
+  <ViewAttribute
+    Name="RejectLineId"
+    PrecisionRule="true"
+    EntityAttrName="RejectLineId"
+    EntityUsage="CustShipmentPacking"
+    AliasName="REJECT_LINE_ID"/>
+  <ViewAttribute
+    Name="OrgId"
+    PrecisionRule="true"
+    EntityAttrName="OrgId"
+    EntityUsage="CustShipmentPacking"
+    AliasName="ORG_ID"/>
+  <ViewAttribute
+    Name="DeliveryChallanId"
+    PrecisionRule="true"
+    EntityAttrName="DeliveryChallanId"
+    EntityUsage="CustShipmentPacking"
+    AliasName="DELIVERY_CHALLAN_ID"/>
+  <ViewAttribute
+    Name="VersionNumber"
+    PrecisionRule="true"
+    EntityAttrName="VersionNumber"
+    EntityUsage="CustShipmentPacking"
+    AliasName="VERSION_NUMBER"/>
+  <ViewAttribute
+    Name="PoLineId"
+    PrecisionRule="true"
+    EntityAttrName="PoLineId"
+    EntityUsage="CustShipmentPacking"
+    AliasName="PO_LINE_ID"/>
+  <ViewAttribute
+    Name="PoHeaderId"
+    PrecisionRule="true"
+    EntityAttrName="PoHeaderId"
+    EntityUsage="CustShipmentPacking"
+    AliasName="PO_HEADER_ID"/>
+  <ViewAttribute
+    Name="ItemId"
+    PrecisionRule="true"
+    EntityAttrName="ItemId"
+    EntityUsage="CustShipmentPacking"
+    AliasName="ITEM_ID"/>
+  <ViewAttribute
+    Name="ParentChallan"
+    PrecisionRule="true"
+    EntityAttrName="ParentChallan"
+    EntityUsage="CustShipmentPacking"
+    AliasName="PARENT_CHALLAN"/>
+  <ViewAttribute
+    Name="OriginalChallanQty"
+    PrecisionRule="true"
+    EntityAttrName="OriginalChallanQty"
+    EntityUsage="CustShipmentPacking"
+    AliasName="ORIGINAL_CHALLAN_QTY"/>
+  <ViewAttribute
+    Name="MissingQty"
+    PrecisionRule="true"
+    EntityAttrName="MissingQty"
+    EntityUsage="CustShipmentPacking"
+    AliasName="MISSING_QTY"/>
+  <ViewAttribute
+    Name="ShortQty"
+    PrecisionRule="true"
+    EntityAttrName="ShortQty"
+    EntityUsage="CustShipmentPacking"
+    AliasName="SHORT_QTY"/>
+  <ViewAttribute
+    Name="BadQty"
+    PrecisionRule="true"
+    EntityAttrName="BadQty"
+    EntityUsage="CustShipmentPacking"
+    AliasName="BAD_QTY"/>
+  <ViewAttribute
+    Name="PurchaseOrderNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PURCHASE_ORDER_NUMBER"
+    Expression="PURCHASE_ORDER_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PurchaseLineNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PURCHASE_LINE_NUMBER"
+    Expression="PURCHASE_LINE_NUMBER"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PackItem"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PACK_ITEM"
+    Expression="PACK_ITEM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ParentChallanNumber"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARENT_CHALLAN_NUMBER"
+    Expression="PARENT_CHALLAN_NUMBER"
+    SQLType="VARCHAR"
+    LOVName="LOV_ParentChallanNumber">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TotalAccepted"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <TransientExpression
+      Name="ExpressionScript"
+      trustMode="untrusted"
+      CodeSourceName="VOXXCustShipmentPackingRow"/>
+    <Dependencies>
+      <Item
+        Value="PackingQty"/>
+      <Item
+        Value="Status"/>
+    </Dependencies>
+  </ViewAttribute>
+</ViewObject>

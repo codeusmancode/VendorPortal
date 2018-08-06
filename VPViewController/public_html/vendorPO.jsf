@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="vendorPO.jsf" id="d1">
+        <af:form id="f1">
+            <af:pageTemplate viewId="/usgCustomTmplt.jsf" id="pt1" partialTriggers="r1">
+                <f:facet name="content">
+                    <af:panelGroupLayout id="pgl1" halign="center" layout="scroll">
+                        <af:region value="#{bindings.tfvendorportal1.regionModel}" id="r1"/>
+                    </af:panelGroupLayout>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+        <f:facet name="metaContainer">
+            <af:resource type="javascript">
+           function newWindow()
+           {
+               document.getElementById("f1").target = "_blank;targetfeatures=toolbar=no location=no directories=no                     menubar=no";
+             }
+            </af:resource>
+        </f:facet>
+    </af:document>
+    <!--oracle-jdev-comment:preferred-managed-bean-name:VendorPo-->
+</f:view>

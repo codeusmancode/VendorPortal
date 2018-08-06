@@ -1,0 +1,12 @@
+//Groovy Scripts for com.usaparel.vpmodel.VO.VOChallanSummaryPOHeaders
+
+package com.usaparel.vpmodel.VO
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="LineSum")
+def LineSum_ExpressionScript_Expression()
+{
+VOChallanSummaryPOLines.sum("SumQty")
+}
+

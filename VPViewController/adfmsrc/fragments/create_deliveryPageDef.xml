@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24" id="create_deliveryPageDef"
+                Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="VOXXCustPoHeader1" RangeSize="5" DataControl="AppModuleDataControl"
+              id="VOXXCustPoHeader1Iterator"/>
+    <searchRegion Binds="VOXXCustPoHeader1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="VOXXCustPoHeader1Query"/>
+    <iterator Binds="VOXXCustPoLines3" RangeSize="7" DataControl="AppModuleDataControl" id="VOXXCustPoLines3Iterator"/>
+    <iterator Binds="VOCustShipmentDeliveryChallan1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="VOCustShipmentDeliveryChallan1Iterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="VOXXCustShipmentPacking3" RangeSize="25" DataControl="AppModuleDataControl"
+              id="VOXXCustShipmentPacking3Iterator" ChangeEventPolicy="ppr"/>
+    <searchRegion Binds="VOXXCustShipmentPacking3Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="VOXXCustShipmentPacking3Query"/>
+    <searchRegion Criteria="VOCustShipmentDeliveryChallanCriteria"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="VOCustShipmentDeliveryChallan1Iterator" id="VOCustShipmentDeliveryChallanCriteriaQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="VOXXCustPoHeader1Iterator" id="VOXXCustPoHeader1">
+      <nodeDefinition DefName="com.usaparel.vpmodel.VO.VOXXCustPoHeader" Name="VOXXCustPoHeader10">
+        <AttrNames>
+          <Item Value="ApprovedDate"/>
+          <Item Value="ClosedDate"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CurrencyCode"/>
+          <Item Value="OperatingUnit"/>
+          <Item Value="OrgId"/>
+          <Item Value="PoHeaderId"/>
+          
+          <Item Value="SubmitDate"/>
+          <Item Value="TypeLookupCode"/>
+          <Item Value="VendorId"/>
+          <Item Value="VendorName"/>
+          <Item Value="VendorSiteCode"/>
+          <Item Value="VendorSiteId"/>
+          <Item Value="PoNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="VOXXCustPoLines3Iterator" id="VOXXCustPoLines3">
+      <nodeDefinition DefName="com.usaparel.vpmodel.VO.VOXXCustPoLines" Name="VOXXCustPoLines30">
+        <AttrNames>
+          <Item Value="ExpirationDate"/>
+          <Item Value="ItemCode"/>
+          <Item Value="ItemDescription"/>
+          <Item Value="ItemId"/>
+          <Item Value="OrgId"/>
+          <Item Value="PoHeaderId"/>
+          <Item Value="PoLineId"/>
+          <Item Value="Quantity"/>
+          <Item Value="StartDate"/>
+          <Item Value="UnitMeasLookupCode"/>
+          <Item Value="UnitPrice"/>
+          <Item Value="TotalShipmentQty"/>
+          <Item Value="MaxShipNumber"/>
+          <Item Value="LineNum"/>
+          <Item Value="packingSum"/>
+          <Item Value="BadSum"/>
+          <Item Value="MissingSum"/>
+          <Item Value="ShortSum"/>
+          <Item Value="TotalAccepted"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="VOCustShipmentDeliveryChallan1Iterator" id="ChallanId">
+      <AttrNames>
+        <Item Value="ChallanId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOCustShipmentDeliveryChallan1Iterator" id="ChallanNumber">
+      <AttrNames>
+        <Item Value="ChallanNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOCustShipmentDeliveryChallan1Iterator" id="DriverContacts">
+      <AttrNames>
+        <Item Value="DriverContacts"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOCustShipmentDeliveryChallan1Iterator" id="ChallanDescription">
+      <AttrNames>
+        <Item Value="ChallanDescription"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOCustShipmentDeliveryChallan1Iterator" id="DeliveryDate">
+      <AttrNames>
+        <Item Value="DeliveryDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOCustShipmentDeliveryChallan1Iterator" id="ChallanStatus">
+      <AttrNames>
+        <Item Value="ChallanStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="VOCustShipmentDeliveryChallan1Iterator" id="First" RequiresUpdateModel="true" Action="first"/>
+    <action IterBinding="VOCustShipmentDeliveryChallan1Iterator" id="Previous" RequiresUpdateModel="true"
+            Action="previous"/>
+    <action IterBinding="VOCustShipmentDeliveryChallan1Iterator" id="Next" RequiresUpdateModel="true" Action="next"/>
+    <action IterBinding="VOCustShipmentDeliveryChallan1Iterator" id="Last" RequiresUpdateModel="true" Action="last"/>
+    <tree IterBinding="VOXXCustShipmentPacking3Iterator" id="VOXXCustShipmentPacking3">
+      <nodeDefinition DefName="com.usaparel.vpmodel.VO.VOXXCustShipmentPacking" Name="VOXXCustShipmentPacking30">
+        <AttrNames>
+          <Item Value="PackingId"/>
+          <Item Value="ShipId"/>
+          <Item Value="PackingLineNum"/>
+          <Item Value="PackingQty"/>
+          <Item Value="PackingDate"/>
+          <Item Value="Status"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="ScanDate"/>
+          <Item Value="ScanLineId"/>
+          <Item Value="ScanBy"/>
+          <Item Value="RejectDate"/>
+          <Item Value="RejectBy"/>
+          <Item Value="RejectLineId"/>
+          <Item Value="OrgId"/>
+          <Item Value="DeliveryChallanId"/>
+          <Item Value="VersionNumber"/>
+          <Item Value="PurchaseOrderNumber"/>
+          <Item Value="PurchaseLineNumber"/>
+          <Item Value="PackItem"/>
+          <Item Value="OriginalChallanQty"/>
+          <Item Value="ParentChallan"/>
+          <Item Value="BadQty"/>
+          <Item Value="ItemId"/>
+          <Item Value="MissingQty"/>
+          <Item Value="PoHeaderId"/>
+          <Item Value="PoLineId"/>
+          <Item Value="ShortQty"/>
+          <Item Value="ParentChallanNumber"/>
+          <Item Value="ParentPackId"/>
+          <Item Value="TotalAccepted"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="VOCustShipmentDeliveryChallan1Iterator" StaticList="false" Uses="LOV_VehicleType"
+          id="VehicleType" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="VOCustShipmentDeliveryChallan1Iterator" StaticList="false" Uses="LOV_MediumType"
+          id="MediumType" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <action IterBinding="VOCustShipmentDeliveryChallan1Iterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="AppModuleDataControl"/>
+    <methodAction IterBinding="VOCustShipmentDeliveryChallan1Iterator" id="shipChallan" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="shipChallan" IsViewObjectMethod="false"
+                  DataControl="AppModuleDataControl"
+                  InstanceName="bindings.VOCustShipmentDeliveryChallan1Iterator.currentRow"
+                  IsLocalObjectReference="true"/>
+    <attributeValues IterBinding="VOCustShipmentDeliveryChallan1Iterator" id="VehicleNumber">
+      <AttrNames>
+        <Item Value="VehicleNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

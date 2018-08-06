@@ -1,0 +1,63 @@
+//Groovy Scripts for com.usaparel.vpmodel.VO.VOXXCustPoLines
+
+package com.usaparel.vpmodel.VO
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="TotalShipmentQty")
+def TotalShipmentQty_ExpressionScript_Expression()
+{
+VOXXCustShipmentLines.sum("ShipQty")
+}
+
+
+@TransientValueExpression(attributeName="MaxShipLineNo")
+def MaxShipId_ExpressionScript_Expression()
+{
+VOXXCustShipmentLines.max("ShipLineNo")
+}
+
+
+@TransientValueExpression(attributeName="MaxShipNumber")
+def MaxShipNumber_ExpressionScript_Expression()
+{
+VOXXCustShipmentLines.max("ShipLineNum")
+}
+
+
+@TransientValueExpression(attributeName="packingSum")
+def packingSum_ExpressionScript_Expression()
+{
+VOXXCustShipmentPacking.sum("PackingQty")
+}
+
+
+@TransientValueExpression(attributeName="BadSum")
+def BadSum_ExpressionScript_Expression()
+{
+VOXXCustShipmentPacking.sum("BadQty != null ? BadQty : 0 ")
+}
+
+
+@TransientValueExpression(attributeName="ShortSum")
+def ShortSum_ExpressionScript_Expression()
+{
+VOXXCustShipmentPacking.sum("ShortQty != null ? ShortQty : 0 ")
+}
+
+
+@TransientValueExpression(attributeName="MissingSum")
+def MissingSum_ExpressionScript_Expression()
+{
+VOXXCustShipmentPacking.sum("MissingQty != null ? MissingQty : 0 ")
+}
+
+
+
+
+@TransientValueExpression(attributeName="TotalAccepted")
+def test_ExpressionScript_Expression()
+{
+VOXXCustShipmentPacking.sum("Status == 'OKAY' ?  PackingQty : 0")
+}
+

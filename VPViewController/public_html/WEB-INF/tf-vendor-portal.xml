@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="tf-vendor-portal">
+    <default-activity>has_user_session</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <router id="has_user_session">
+      <case id="__1">
+        <expression>#{sessionScope.username != null}</expression>
+        <outcome>has_session</outcome>
+      </case>
+      <case id="__2">
+        <expression>#{sessionScope.username == null}</expression>
+        <outcome>no_session</outcome>
+      </case>
+      <default-outcome>no_session</default-outcome>
+    </router>
+    <task-flow-call id="call_tf_login">
+      <task-flow-reference>
+        <document>/WEB-INF/tf-login.xml</document>
+        <id>tf-login</id>
+      </task-flow-reference>
+    </task-flow-call>
+    <task-flow-call id="call_tf-vendorpo">
+      <task-flow-reference>
+        <document>/WEB-INF/tf-vendorpo.xml</document>
+        <id>tf-vendorpo</id>
+      </task-flow-reference>
+    </task-flow-call>
+    <control-flow-rule id="__3">
+      <from-activity-id>has_user_session</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>no_session</from-outcome>
+        <to-activity-id>call_tf_login</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__5">
+        <from-outcome>has_session</from-outcome>
+        <to-activity-id>call_tf-vendorpo</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+    <visibility/>
+  </task-flow-definition>
+</adfc-config>

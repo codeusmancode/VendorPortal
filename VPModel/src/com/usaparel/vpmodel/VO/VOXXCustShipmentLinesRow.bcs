@@ -1,0 +1,12 @@
+//Groovy Scripts for com.usaparel.vpmodel.VO.VOXXCustShipmentLines
+
+package com.usaparel.vpmodel.VO
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="totalPackingQty")
+def ViewAttr_ExpressionScript_Expression()
+{
+VOXXCustShipmentPacking.sum("PackingQty")
+}
+

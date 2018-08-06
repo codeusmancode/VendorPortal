@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="tf-login">
+    <default-activity>login_view</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>Test</managed-bean-name>
+      <managed-bean-class>Test</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__4">
+      <managed-bean-name>MethodClass</managed-bean-name>
+      <managed-bean-class>MethodClass</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__2">
+      <managed-bean-name>UserAuthBean</managed-bean-name>
+      <managed-bean-class>com.usaparel.vpview.managedbeans.SessionHandler</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="login_view">
+      <page>/fragments/user_login_view.jsff</page>
+    </view>
+    <router id="is_success">
+      <case id="__8">
+        <expression>#{pageFlowScope.returnVal != -1}</expression>
+        <outcome>good</outcome>
+      </case>
+      <case id="__9">
+        <expression>#{pageFlowScope.returnVal == -1}</expression>
+        <outcome>bad</outcome>
+      </case>
+      <default-outcome>bad</default-outcome>
+    </router>
+    <task-flow-call id="call_vendorpo">
+      <task-flow-reference>
+        <document>/WEB-INF/tf-vendorpo.xml</document>
+        <id>tf-vendorpo</id>
+      </task-flow-reference>
+    </task-flow-call>
+    <method-call id="login">
+      <method>#{bindings.login.execute}</method>
+      <return-value>#{pageFlowScope.returnVal}</return-value>
+      <outcome>
+        <fixed-outcome>check</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="set_user_session">
+      <method>#{backingBeanScope.UserAuthBean.setUserSession}</method>
+      <parameter>
+        <class>java.lang.String</class>
+        <value>#{pageFlowScope.username}</value>
+      </parameter>
+      <parameter>
+        <class>java.lang.Integer</class>
+        <value>#{pageFlowScope.returnVal}</value>
+      </parameter>
+      <outcome>
+        <fixed-outcome>showpo</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="showError">
+      <method>#{backingBeanScope.UserAuthBean.showError}</method>
+      <outcome>
+        <fixed-outcome>error</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__10">
+      <from-activity-id>is_success</from-activity-id>
+      <control-flow-case id="__17">
+        <from-outcome>good</from-outcome>
+        <to-activity-id>set_user_session</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__3">
+        <from-outcome>bad</from-outcome>
+        <to-activity-id>showError</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__12">
+      <from-activity-id>login_view</from-activity-id>
+      <control-flow-case id="__14">
+        <from-outcome>login</from-outcome>
+        <to-activity-id>login</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__15">
+      <from-activity-id>login</from-activity-id>
+      <control-flow-case id="__16">
+        <from-outcome>check</from-outcome>
+        <to-activity-id>is_success</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__18">
+      <from-activity-id>set_user_session</from-activity-id>
+      <control-flow-case id="__19">
+        <from-outcome>showpo</from-outcome>
+        <to-activity-id>call_vendorpo</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>showError</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>error</from-outcome>
+        <to-activity-id>login_view</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

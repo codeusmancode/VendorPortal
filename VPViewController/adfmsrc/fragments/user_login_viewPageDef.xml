@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24" id="user_login_viewPageDef"
+                Package="fragments">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="_login" RequiresUpdateModel="true" Action="invokeMethod" MethodName="_login"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="bindings._login.dataControl.dataProvider"
+                  ReturnName="data.AppModuleDataControl.methodResults._login__login_dataControl_dataProvider__login_result">
+      <NamedData NDName="username" NDType="java.lang.String"/>
+      <NamedData NDName="password" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

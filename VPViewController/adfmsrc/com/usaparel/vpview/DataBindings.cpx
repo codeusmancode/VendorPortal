@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.2.1.12.24" id="DataBindings"
+             SeparateXMLFiles="false" Package="com.usaparel.vpview" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/testpage.jsf" usageId="com_usaparel_vpview_testpagePageDef"/>
+    <page path="/vendorPO.jsf" usageId="com_usaparel_vpview_vendorPOPageDef"/>
+    <page path="/WEB-INF/tf-vendorpo.xml#tf-vendorpo@ExecuteWithParams"
+          usageId="com_usaparel_vpview_tf_vendorpo_tf_vendorpo_ExecuteWithParamsPageDef"/>
+    <page path="/fragments/po.jsff" usageId="com_usaparel_vpview_poPageDef"/>
+    <page path="/untitled1.jsf" usageId="com_usaparel_vpview_untitled1PageDef"/>
+    <page path="/fragments/user_login_view.jsff" usageId="com_usaparel_vpview_user_login_viewPageDef"/>
+    <page path="/WEB-INF/tf-login.xml#tf-login@login" usageId="com_usaparel_vpview_tf_login_tf_login_loginPageDef"/>
+    <page path="/fragments/create_delivery.jsff" usageId="com_usaparel_vpview_create_deliveryPageDef"/>
+    <page path="/fragments/summary.jsff" usageId="com_usaparel_vpview_summaryPageDef"/>
+    <page path="/WEB-INF/challan_summary.xml#challan_summary@ExecuteWithParams"
+          usageId="com_usaparel_vpview_challan_summary_challan_summary_ExecuteWithParamsPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="com_usaparel_vpview_testpagePageDef" path="com.usaparel.vpview.pageDefs.testpagePageDef"/>
+    <page id="com_usaparel_vpview_vendorPOPageDef" path="com.usaparel.vpview.pageDefs.vendorPOPageDef"/>
+    <page id="com_usaparel_vpview_tf_vendorpo_tf_vendorpo_ExecuteWithParamsPageDef"
+          path="com.usaparel.vpview.pageDefs.tf_vendorpo_tf_vendorpo_ExecuteWithParamsPageDef"/>
+    <page id="com_usaparel_vpview_poPageDef" path="fragments.poPageDef"/>
+    <page id="com_usaparel_vpview_untitled1PageDef" path="com.usaparel.vpview.pageDefs.untitled1PageDef"/>
+    <page id="com_usaparel_vpview_user_login_viewPageDef" path="fragments.user_login_viewPageDef"/>
+    <page id="com_usaparel_vpview_tf_login_tf_login_loginPageDef"
+          path="com.usaparel.vpview.pageDefs.tf_login_tf_login_loginPageDef"/>
+    <page id="com_usaparel_vpview_create_deliveryPageDef" path="fragments.create_deliveryPageDef"/>
+    <page id="com_usaparel_vpview_summaryPageDef" path="fragments.summaryPageDef"/>
+    <page id="com_usaparel_vpview_challan_summary_challan_summary_ExecuteWithParamsPageDef"
+          path="com.usaparel.vpview.pageDefs.challan_summary_challan_summary_ExecuteWithParamsPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="AppModuleDataControl" Package="com.usaparel.vpmodel.AM"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="AppModuleLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

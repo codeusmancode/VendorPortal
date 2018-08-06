@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24"
+                id="tf_vendorpo_tf_vendorpo_CreateWithParametersPageDef" Package="com.usaparel.vpview.pageDefs"
+                SkipValidation="true">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator id="VOXXCustPoHeader1Iterator" Binds="VOXXCustPoHeader1" DataControl="AppModuleDataControl"
+              RangeSize="25"/>
+  </executables>
+  <bindings/>
+</pageDefinition>

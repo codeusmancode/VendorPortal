@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="VLSummaryDetailSummary"
+  Version="12.2.1.12.24"
+  InheritPersonalization="merge">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.usaparel.vpmodel.VO.VLSummaryDetailSummary_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="VOChallanSummaryPOLines"
+    Cardinality="1"
+    Source="true"
+    Owner="com.usaparel.vpmodel.VO.VOChallanSummaryPOLines">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="VOChallanSummaryPOLines"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.usaparel.vpmodel.VO.VOChallanSummaryPOLines.PoLineId"/>
+      <Item Value="com.usaparel.vpmodel.VO.VOChallanSummaryPOLines.DeliveryChallanId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="VOInvalidChallanQty"
+    Cardinality="-1"
+    Owner="com.usaparel.vpmodel.VO.VOInvalidChallanQty">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="VOInvalidChallanQty"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.usaparel.vpmodel.VO.VOInvalidChallanQty.PoLineId"/>
+      <Item Value="com.usaparel.vpmodel.VO.VOInvalidChallanQty.ChallanId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.usaparel.vpmodel.VPModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="VOXXCustShipmentLines"
+  Version="12.2.1.12.24"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  FetchSize="4"
+  RowClass="com.usaparel.vpmodel.VO.VOXXCustShipmentLinesRowImpl"
+  FetchMode="FETCH_ALL">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <ViewAccessor
+    Name="AppModule_LOVStatus1_1"
+    ViewObjectName="com.usaparel.vpmodel.VO.LOVStatus"
+    AMUsageName="AppModule"
+    ViewInstanceName="LOVStatus1"
+    RowLevelBinds="false"/>
+  <ListBinding
+    Name="LOV_Status"
+    ListVOName="AppModule_LOVStatus1_1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Status"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Status"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Status"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery><![CDATA[SELECT CustShipmentLines.SHIP_ID,   
+       CustShipmentLines.SHIP_LINE_NUM,   
+       CustShipmentLines.SHIP_NO,   
+       CustShipmentLines.PO_LINE_ID,   
+       CustShipmentLines.SHIP_QTY,   
+       CustShipmentLines.PACKING_SIZE,   
+       CustShipmentLines.PACKING_DIVISOR,   
+       CustShipmentLines.STATUS,   
+       CustShipmentLines.SHIP_DATE,   
+       CustShipmentLines.CREATED_BY,   
+       CustShipmentLines.CREATION_DATE,   
+       CustShipmentLines.LAST_UPDATED_BY,   
+       CustShipmentLines.LAST_UPDATE_DATE, 
+       CustShipmentLines.VERSION_NUMBER  
+FROM  CUST_SHIPMENT_LINES CustShipmentLines]]></SQLQuery>
+  <EntityUsage
+    Name="CustShipmentLines"
+    Entity="com.usaparel.vpmodel.EO.CustShipmentLines"/>
+  <ViewAttribute
+    Name="ShipId"
+    PrecisionRule="true"
+    EntityAttrName="ShipId"
+    EntityUsage="CustShipmentLines"
+    AliasName="SHIP_ID"/>
+  <ViewAttribute
+    Name="ShipLineNum"
+    PrecisionRule="true"
+    EntityAttrName="ShipLineNum"
+    EntityUsage="CustShipmentLines"
+    AliasName="SHIP_LINE_NUM"/>
+  <ViewAttribute
+    Name="ShipNo"
+    PrecisionRule="true"
+    EntityAttrName="ShipNo"
+    EntityUsage="CustShipmentLines"
+    AliasName="SHIP_NO"/>
+  <ViewAttribute
+    Name="PoLineId"
+    PrecisionRule="true"
+    EntityAttrName="PoLineId"
+    EntityUsage="CustShipmentLines"
+    AliasName="PO_LINE_ID"/>
+  <ViewAttribute
+    Name="ShipQty"
+    PrecisionRule="true"
+    EntityAttrName="ShipQty"
+    EntityUsage="CustShipmentLines"
+    AliasName="SHIP_QTY"/>
+  <ViewAttribute
+    Name="PackingSize"
+    PrecisionRule="true"
+    EntityAttrName="PackingSize"
+    EntityUsage="CustShipmentLines"
+    AliasName="PACKING_SIZE"
+    DefaultValue="0"/>
+  <ViewAttribute
+    Name="PackingDivisor"
+    PrecisionRule="true"
+    EntityAttrName="PackingDivisor"
+    EntityUsage="CustShipmentLines"
+    AliasName="PACKING_DIVISOR"
+    DefaultValue="0"/>
+  <ViewAttribute
+    Name="Status"
+    PrecisionRule="true"
+    EntityAttrName="Status"
+    EntityUsage="CustShipmentLines"
+    AliasName="STATUS"
+    LOVName="LOV_Status">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShipDate"
+    PrecisionRule="true"
+    EntityAttrName="ShipDate"
+    EntityUsage="CustShipmentLines"
+    AliasName="SHIP_DATE"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="CustShipmentLines"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="CreationDate"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="CustShipmentLines"
+    AliasName="CREATION_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="CustShipmentLines"
+    AliasName="LAST_UPDATED_BY"/>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateDate"
+    EntityUsage="CustShipmentLines"
+    AliasName="LAST_UPDATE_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="VersionNumber"
+    PrecisionRule="true"
+    EntityAttrName="VersionNumber"
+    EntityUsage="CustShipmentLines"
+    AliasName="VERSION_NUMBER"/>
+  <ViewAttribute
+    Name="totalPackingQty"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <TransientExpression
+      Name="ExpressionScript"
+      trustMode="untrusted"
+      CodeSourceName="VOXXCustShipmentLinesRow"/>
+  </ViewAttribute>
+  <ViewLinkAccessor
+    Name="VOXXCustShipmentPacking"
+    ViewLink="com.usaparel.vpmodel.VlShipLinesShipPacking"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+</ViewObject>

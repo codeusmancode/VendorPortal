@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelStretchLayout id="psl1" startWidth="33%" endWidth="33%"
+                                   topHeight="33%" bottomHeight="33%">
+              <f:facet name="center">
+      <af:panelGroupLayout id="pgl1" layout="vertical" halign="center">
+        <af:inputText label="Username:" id="it1" columns="40" value="#{pageFlowScope.username}"/>
+        <af:inputText label="Password:" id="it2" columns="40" value="#{pageFlowScope.password}" secret="true"/>
+        <af:button text="Login" id="b1" action="login"/>
+        <af:activeOutputText value="" id="aot1"/>
+      </af:panelGroupLayout>
+    </f:facet>
+              <f:facet name="bottom">
+                <af:panelGroupLayout id="pgl2"/>
+              </f:facet>
+              <f:facet name="top"/>
+            </af:panelStretchLayout>
+  <!--oracle-jdev-comment:preferred-managed-bean-name:Test-->
+</ui:composition>

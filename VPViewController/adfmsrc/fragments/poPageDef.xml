@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24" id="poPageDef" Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="VOXXCustPoHeader1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="VOXXCustPoHeader1Iterator"/>
+    <iterator Binds="VOXXCustPoLines3" RangeSize="3" DataControl="AppModuleDataControl" id="VOXXCustPoLines3Iterator"/>
+    <iterator Binds="VOXXCustShipmentPacking2" RangeSize="3" DataControl="AppModuleDataControl"
+              id="VOXXCustShipmentPacking2Iterator"/>
+    <iterator Binds="VOXXCustShipmentLines2" RangeSize="3" DataControl="AppModuleDataControl"
+              id="VOXXCustShipmentLines2Iterator"/>
+    <searchRegion Binds="VOXXCustShipmentPacking2Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="VOXXCustShipmentPacking2Query"/>
+    <searchRegion Criteria="VOXXCustPoHeaderCriteria" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="VOXXCustPoHeader1Iterator" id="VOXXCustPoHeaderCriteriaQuery"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="VOXXCustPoHeader1Iterator" id="ApprovedDate">
+      <AttrNames>
+        <Item Value="ApprovedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXXCustPoHeader1Iterator" id="ClosedDate">
+      <AttrNames>
+        <Item Value="ClosedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXXCustPoHeader1Iterator" id="CreationDate">
+      <AttrNames>
+        <Item Value="CreationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXXCustPoHeader1Iterator" id="CurrencyCode">
+      <AttrNames>
+        <Item Value="CurrencyCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXXCustPoHeader1Iterator" id="OperatingUnit">
+      <AttrNames>
+        <Item Value="OperatingUnit"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXXCustPoHeader1Iterator" id="OrgId">
+      <AttrNames>
+        <Item Value="OrgId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXXCustPoHeader1Iterator" id="PoHeaderId">
+      <AttrNames>
+        <Item Value="PoHeaderId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXXCustPoHeader1Iterator" id="PoNo">
+      <AttrNames>
+        <Item Value="PoNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXXCustPoHeader1Iterator" id="SubmitDate">
+      <AttrNames>
+        <Item Value="SubmitDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXXCustPoHeader1Iterator" id="TypeLookupCode">
+      <AttrNames>
+        <Item Value="TypeLookupCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXXCustPoHeader1Iterator" id="VendorId">
+      <AttrNames>
+        <Item Value="VendorId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXXCustPoHeader1Iterator" id="VendorName">
+      <AttrNames>
+        <Item Value="VendorName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXXCustPoHeader1Iterator" id="VendorSiteCode">
+      <AttrNames>
+        <Item Value="VendorSiteCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXXCustPoHeader1Iterator" id="VendorSiteId">
+      <AttrNames>
+        <Item Value="VendorSiteId"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="VOXXCustPoHeader1Iterator" id="First" RequiresUpdateModel="true" Action="first"/>
+    <action IterBinding="VOXXCustPoHeader1Iterator" id="Previous" RequiresUpdateModel="true" Action="previous"/>
+    <action IterBinding="VOXXCustPoHeader1Iterator" id="Next" RequiresUpdateModel="true" Action="next"/>
+    <action IterBinding="VOXXCustPoHeader1Iterator" id="Last" RequiresUpdateModel="true" Action="last"/>
+    <tree IterBinding="VOXXCustPoLines3Iterator" id="VOXXCustPoLines3">
+      <nodeDefinition DefName="com.usaparel.vpmodel.VO.VOXXCustPoLines" Name="VOXXCustPoLines30">
+        <AttrNames>
+          <Item Value="ExpirationDate"/>
+          <Item Value="ItemCode"/>
+          <Item Value="ItemDescription"/>
+          <Item Value="ItemId"/>
+          <Item Value="LineNum"/>
+          <Item Value="OrgId"/>
+          <Item Value="PoHeaderId"/>
+          <Item Value="PoLineId"/>
+          <Item Value="Quantity"/>
+          <Item Value="StartDate"/>
+          <Item Value="UnitMeasLookupCode"/>
+          <Item Value="UnitPrice"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="VOXXCustShipmentPacking2Iterator" id="VOXXCustShipmentPacking2">
+      <nodeDefinition DefName="com.usaparel.vpmodel.VO.VOXXCustShipmentPacking" Name="VOXXCustShipmentPacking20">
+        <AttrNames>
+          <Item Value="PackingId"/>
+          <Item Value="ShipId"/>
+          <Item Value="PackingLineNum"/>
+          <Item Value="PackingQty"/>
+          <Item Value="PackingDate"/>
+          <Item Value="Status"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="ScanDate"/>
+          <Item Value="ScanLineId"/>
+          <Item Value="ScanBy"/>
+          <Item Value="RejectDate"/>
+          <Item Value="RejectBy"/>
+          <Item Value="RejectLineId"/>
+          <Item Value="OrgId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="VOXXCustShipmentLines2Iterator" id="totalPackingQty">
+      <AttrNames>
+        <Item Value="totalPackingQty"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" DataControl="AppModuleDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <tree IterBinding="VOXXCustShipmentLines2Iterator" id="VOXXCustShipmentLines2">
+      <nodeDefinition DefName="com.usaparel.vpmodel.VO.VOXXCustShipmentLines" Name="VOXXCustShipmentLines20">
+        <AttrNames>
+          <Item Value="ShipId"/>
+          <Item Value="ShipLineNum"/>
+          <Item Value="ShipNo"/>
+          <Item Value="PoLineId"/>
+          <Item Value="ShipQty"/>
+          <Item Value="PackingSize"/>
+          <Item Value="PackingDivisor"/>
+          <Item Value="Status"/>
+          <Item Value="ShipDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="VersionNumber"/>
+          <Item Value="totalPackingQty"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="VOXXCustPoLines3Iterator" id="TotalShipmentQty">
+      <AttrNames>
+        <Item Value="TotalShipmentQty"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="VOXXCustPoHeader1Iterator" id="Execute" RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <attributeValues IterBinding="VOXXCustShipmentLines2Iterator" id="PackingSize">
+      <AttrNames>
+        <Item Value="PackingSize"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXXCustShipmentLines2Iterator" id="Status1">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="VOXXCustShipmentLines2Iterator" id="CreateInsert"
+            InstanceName="AppModuleDataControl.VOXXCustShipmentLines2" DataControl="AppModuleDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="VOXXCustShipmentPacking2Iterator" id="Delete" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <attributeValues IterBinding="VOXXCustPoLines3Iterator" id="Quantity">
+      <AttrNames>
+        <Item Value="Quantity"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

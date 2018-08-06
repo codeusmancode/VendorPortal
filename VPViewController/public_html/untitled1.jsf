@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="untitled1.jsf" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:treeTable value="#{bindings.VOChallanSummaryPOHeaders1.treeModel}" var="node"
+                          selectionListener="#{bindings.VOChallanSummaryPOHeaders1.treeModel.makeCurrent}"
+                          rowSelection="single" id="tt1">
+                <f:facet name="nodeStamp">
+                    <af:column id="c1">
+                        <af:outputText value="#{node}" id="ot1"/>
+                    </af:column>
+                </f:facet>
+                <f:facet name="pathStamp">
+                    <af:outputText value="#{node}" id="ot2"/>
+                </f:facet>
+            </af:treeTable>
+        </af:form>
+    </af:document>
+    <!--oracle-jdev-comment:preferred-managed-bean-name:F-->
+</f:view>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24" id="untitled1PageDef"
+                Package="com.usaparel.vpview.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="VOXXCustShipmentPacking3" RangeSize="25" DataControl="AppModuleDataControl"
+              id="VOXXCustShipmentPacking3Iterator"/>
+    <iterator Binds="VOXXCustShipmentPacking1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="VOXXCustShipmentPacking1Iterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="VOChallanSummaryPOHeaders1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="VOChallanSummaryPOHeaders1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="VOXXCustShipmentPacking3Iterator" id="VOXXCustShipmentPacking3">
+      <nodeDefinition DefName="com.usaparel.vpmodel.VO.VOXXCustShipmentPacking" Name="VOXXCustShipmentPacking30">
+        <AttrNames>
+          <Item Value="PackingId"/>
+          <Item Value="ShipId"/>
+          <Item Value="PackingLineNum"/>
+          <Item Value="PackingQty"/>
+          <Item Value="PackingDate"/>
+          <Item Value="Status"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="ScanDate"/>
+          <Item Value="ScanLineId"/>
+          <Item Value="ScanBy"/>
+          <Item Value="RejectDate"/>
+          <Item Value="RejectBy"/>
+          <Item Value="RejectLineId"/>
+          <Item Value="OrgId"/>
+          <Item Value="DeliveryChallanId"/>
+          <Item Value="VersionNumber"/>
+          <Item Value="PoLineId"/>
+          <Item Value="PoHeaderId"/>
+          <Item Value="ItemId"/>
+          <Item Value="PurchaseOrderNumber"/>
+          <Item Value="PurchaseLineNumber"/>
+          <Item Value="PackItem"/>
+          <Item Value="OriginalChallanQty"/>
+          <Item Value="ParentChallan"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="VOXXCustShipmentPacking1Iterator" id="First" RequiresUpdateModel="true" Action="first"/>
+    <action IterBinding="VOXXCustShipmentPacking1Iterator" id="Previous" RequiresUpdateModel="true" Action="previous"/>
+    <action IterBinding="VOXXCustShipmentPacking1Iterator" id="Next" RequiresUpdateModel="true" Action="next"/>
+    <action IterBinding="VOXXCustShipmentPacking1Iterator" id="Last" RequiresUpdateModel="true" Action="last"/>
+    <tree IterBinding="VOChallanSummaryPOHeaders1Iterator" id="VOChallanSummaryPOHeaders1">
+      <nodeDefinition DefName="com.usaparel.vpmodel.VO.VOChallanSummaryPOHeaders" Name="VOChallanSummaryPOHeaders10">
+        <AttrNames>
+          <Item Value="OrgId"/>
+          <Item Value="ApprovedDate"/>
+          <Item Value="ChallanId"/>
+          <Item Value="ClosedDate"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CurrencyCode"/>
+          <Item Value="LineSum"/>
+          <Item Value="OperatingUnit"/>
+          <Item Value="PoHeaderId"/>
+          <Item Value="PoNo"/>
+          <Item Value="SubmitDate"/>
+          <Item Value="TypeLookupCode"/>
+          <Item Value="VendorId"/>
+          <Item Value="VendorName"/>
+          <Item Value="VendorSiteCode"/>
+          <Item Value="VendorSiteId"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="VOChallanSummaryPOLines"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="com.usaparel.vpmodel.VO.VOChallanSummaryPOLines" Name="VOChallanSummaryPOHeaders11">
+        <AttrNames>
+          <Item Value="SumQty"/>
+          <Item Value="DeliveryChallanId"/>
+          <Item Value="Invalid"/>
+          <Item Value="ItemDescription"/>
+          <Item Value="LineNum"/>
+          <Item Value="PoHeaderId"/>
+          <Item Value="PoLineId"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="VOInvalidChallanQty"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="com.usaparel.vpmodel.VO.VOInvalidChallanQty" Name="VOChallanSummaryPOHeaders12">
+        <AttrNames>
+          <Item Value="ChallanId"/>
+          <Item Value="BadQty"/>
+          <Item Value="ChallanNumber"/>
+          <Item Value="ItemDescription"/>
+          <Item Value="ItemId"/>
+          <Item Value="LineNum"/>
+          <Item Value="MissingQty"/>
+          <Item Value="PackingId"/>
+          <Item Value="PackingQty"/>
+          <Item Value="PoHeaderId"/>
+          <Item Value="PoLineId"/>
+          <Item Value="ReturnType"/>
+          <Item Value="Segment1"/>
+          <Item Value="ShortQty"/>
+          <Item Value="TotalChallanQty"/>
+          <Item Value="UnitMeasLookupCode"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

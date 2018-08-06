@@ -1,0 +1,722 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+  <af:panelGroupLayout id="pgl3" layout="vertical">
+    <af:panelBox text="Search" id="pb1" background="light" disclosed="false">
+      <f:facet name="toolbar"/>
+      <af:query id="qryId1" headerText="Search" disclosed="true"
+                value="#{bindings.VOXXCustPoHeaderCriteriaQuery.queryDescriptor}"
+                model="#{bindings.VOXXCustPoHeaderCriteriaQuery.queryModel}"
+                queryListener="#{bindings.VOXXCustPoHeaderCriteriaQuery.processQuery}"
+                queryOperationListener="#{bindings.VOXXCustPoHeaderCriteriaQuery.processQueryOperation}"
+                displayMode="simple" />
+      <af:button actionListener="#{bindings.Execute.execute}" text="Execute" disabled="#{!bindings.Execute.enabled}"
+                 id="b6"/>
+    </af:panelBox>
+    <af:toolbar id="t5">
+      <af:outputText value="Purchase Orders" id="ot16" inlineStyle="color:black; font-size:x-large;"/>
+      <af:button actionListener="#{bindings.First.execute}" text="First" disabled="#{!bindings.First.enabled}"
+                 partialSubmit="true" id="b1"/>
+      <af:button actionListener="#{bindings.Previous.execute}" text="Previous" disabled="#{!bindings.Previous.enabled}"
+                 partialSubmit="true" id="b2"/>
+      <af:button actionListener="#{bindings.Next.execute}" text="Next" disabled="#{!bindings.Next.enabled}"
+                 partialSubmit="true" id="b3"/>
+      <af:button actionListener="#{bindings.Last.execute}" text="Last" disabled="#{!bindings.Last.enabled}"
+                 partialSubmit="true" id="b4"/>
+      <af:button text="Exit" id="b5" action="logout"/>
+      <af:button text="Barcode" id="b7" action="#{backingBeanScope.VendorPo.openBarcodeReport}"/>
+      <af:button text="PO Details" id="b9" action="#{backingBeanScope.VendorPo.openPODetailCSVReport}"/>
+    </af:toolbar>
+    <af:panelGroupLayout id="pgl1" inlineStyle="padding-left:20px;padding-right:20px;" layout="vertical">
+      <af:panelGroupLayout id="pgl4" layout="vertical" halign="left"
+                           inlineStyle="background-color:#f7f7f7;padding:15px">
+        <af:panelFormLayout id="pfl1" rows="3" maxColumns="4" labelAlignment="start"
+                            inlineStyle="background-color:#e8e7e7">
+          <af:inputDate value="#{bindings.ApprovedDate.inputValue}" label="Approved Date:"
+                        required="#{bindings.ApprovedDate.hints.mandatory}"
+                        columns="20"
+                        shortDesc="#{bindings.ApprovedDate.hints.tooltip}" id="id1" disabled="true">
+            <f:validator binding="#{bindings.ApprovedDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.ApprovedDate.format}"/>
+          </af:inputDate>
+          <af:inputDate value="#{bindings.ClosedDate.inputValue}" label="Closed Date:"
+                        required="#{bindings.ClosedDate.hints.mandatory}"
+                        columns="20"
+                        shortDesc="#{bindings.ClosedDate.hints.tooltip}" id="id2" disabled="true">
+            <f:validator binding="#{bindings.ClosedDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.ClosedDate.format}"/>
+          </af:inputDate>
+          <af:inputDate value="#{bindings.CreationDate.inputValue}" label="Creation Date:"
+                        required="#{bindings.CreationDate.hints.mandatory}"
+                        columns="20"
+                        shortDesc="#{bindings.CreationDate.hints.tooltip}" id="id3" rendered="true" disabled="true">
+            <f:validator binding="#{bindings.CreationDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.CreationDate.format}"/>
+          </af:inputDate>
+          <af:inputText value="#{bindings.CurrencyCode.inputValue}" label="Currency Code"
+                        required="#{bindings.CurrencyCode.hints.mandatory}"
+                        columns="20"
+                        maximumLength="#{bindings.CurrencyCode.hints.precision}"
+                        shortDesc="#{bindings.CurrencyCode.hints.tooltip}" id="it1" disabled="true">
+            <f:validator binding="#{bindings.CurrencyCode.validator}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.OperatingUnit.inputValue}" label="Operating Unit:"
+                        required="#{bindings.OperatingUnit.hints.mandatory}"
+                        columns="20"
+                        maximumLength="#{bindings.OperatingUnit.hints.precision}"
+                        shortDesc="#{bindings.OperatingUnit.hints.tooltip}" id="it2" inlineStyle="font-size:smaller;"
+                        contentStyle="color:red;" disabled="true">
+            <f:validator binding="#{bindings.OperatingUnit.validator}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.OrgId.inputValue}" label="#{bindings.OrgId.hints.label}"
+                        required="#{bindings.OrgId.hints.mandatory}" columns="#{bindings.OrgId.hints.displayWidth}"
+                        maximumLength="#{bindings.OrgId.hints.precision}" shortDesc="#{bindings.OrgId.hints.tooltip}"
+                        id="it3" rendered="false">
+            <f:validator binding="#{bindings.OrgId.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.OrgId.format}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.PoHeaderId.inputValue}" label="#{bindings.PoHeaderId.hints.label}"
+                        required="#{bindings.PoHeaderId.hints.mandatory}"
+                        columns="#{bindings.PoHeaderId.hints.displayWidth}"
+                        maximumLength="#{bindings.PoHeaderId.hints.precision}"
+                        shortDesc="#{bindings.PoHeaderId.hints.tooltip}" id="it4" rendered="false">
+            <f:validator binding="#{bindings.PoHeaderId.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.PoHeaderId.format}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.PoNo.inputValue}" label="PO Number:"
+                        required="#{bindings.PoNo.hints.mandatory}" columns="20"
+                        maximumLength="#{bindings.PoNo.hints.precision}" shortDesc="#{bindings.PoNo.hints.tooltip}"
+                        id="it5" disabled="true" binding="#{backingBeanScope.VendorPo.itPoNo}">
+            <f:validator binding="#{bindings.PoNo.validator}"/>
+          </af:inputText>
+          <af:inputDate value="#{bindings.SubmitDate.inputValue}" label="Submit Date:"
+                        required="#{bindings.SubmitDate.hints.mandatory}"
+                        columns="16"
+                        shortDesc="#{bindings.SubmitDate.hints.tooltip}" id="id4" disabled="true">
+            <f:validator binding="#{bindings.SubmitDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.SubmitDate.format}"/>
+          </af:inputDate>
+          <af:inputText value="#{bindings.TypeLookupCode.inputValue}" label="#{bindings.TypeLookupCode.hints.label}"
+                        required="#{bindings.TypeLookupCode.hints.mandatory}"
+                        columns="#{bindings.TypeLookupCode.hints.displayWidth}"
+                        maximumLength="#{bindings.TypeLookupCode.hints.precision}"
+                        shortDesc="#{bindings.TypeLookupCode.hints.tooltip}" id="it6" rendered="false">
+            <f:validator binding="#{bindings.TypeLookupCode.validator}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.VendorName.inputValue}" label="Vendor Name:"
+                        required="#{bindings.VendorName.hints.mandatory}"
+                        columns="20"
+                        maximumLength="#{bindings.VendorName.hints.precision}"
+                        shortDesc="#{bindings.VendorName.hints.tooltip}" id="it8" disabled="true"
+                        binding="#{backingBeanScope.VendorPo.itVendorName}">
+            <f:validator binding="#{bindings.VendorName.validator}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.VendorSiteCode.inputValue}" label="Vendor Site:"
+                        required="#{bindings.VendorSiteCode.hints.mandatory}"
+                        columns="20"
+                        maximumLength="#{bindings.VendorSiteCode.hints.precision}"
+                        shortDesc="#{bindings.VendorSiteCode.hints.tooltip}" id="it9" disabled="true">
+            <f:validator binding="#{bindings.VendorSiteCode.validator}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.VendorSiteId.inputValue}" label="#{bindings.VendorSiteId.hints.label}"
+                        required="#{bindings.VendorSiteId.hints.mandatory}"
+                        columns="#{bindings.VendorSiteId.hints.displayWidth}"
+                        maximumLength="#{bindings.VendorSiteId.hints.precision}"
+                        shortDesc="#{bindings.VendorSiteId.hints.tooltip}" id="it10" rendered="false">
+            <f:validator binding="#{bindings.VendorSiteId.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.VendorSiteId.format}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.VendorId.inputValue}" label="#{bindings.VendorId.hints.label}"
+                        required="#{bindings.VendorId.hints.mandatory}"
+                        columns="#{bindings.VendorId.hints.displayWidth}"
+                        maximumLength="#{bindings.VendorId.hints.precision}"
+                        shortDesc="#{bindings.VendorId.hints.tooltip}" id="it7" rendered="true" visible="false"
+                        binding="#{backingBeanScope.VendorPo.itVendorID}">
+            <f:validator binding="#{bindings.VendorId.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.VendorId.format}"/>
+          </af:inputText>
+          <f:facet name="footer"/>
+        </af:panelFormLayout>
+        <af:spacer width="10" height="5" id="s1"/>
+        <af:table value="#{bindings.VOXXCustPoLines3.collectionModel}" var="row"
+                  rows="#{bindings.VOXXCustPoLines3.rangeSize}"
+                  emptyText="#{bindings.VOXXCustPoLines3.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0" selectedRowKeys="#{bindings.VOXXCustPoLines3.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.VOXXCustPoLines3.collectionModel.makeCurrent}" rowSelection="single"
+                  fetchSize="#{bindings.VOXXCustPoLines3.rangeSize}" id="t1" autoHeightRows="3"
+                  contentDelivery="immediate" width="90%">
+          <af:column headerText="PO Line ID" id="c8" rendered="true">
+            <af:outputText value="#{row.PoLineId}" shortDesc="#{bindings.VOXXCustPoLines3.hints.PoLineId.tooltip}"
+                           id="ot8">
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.VOXXCustPoLines3.hints.PoLineId.format}"/>
+            </af:outputText>
+          </af:column>
+          <af:column headerText="Line#" id="c5">
+            <af:outputText value="#{row.LineNum}" shortDesc="#{bindings.VOXXCustPoLines3.hints.LineNum.tooltip}"
+                           id="ot5">
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.VOXXCustPoLines3.hints.LineNum.format}"/>
+            </af:outputText>
+          </af:column>
+          <af:column headerText="#{bindings.VOXXCustPoLines3.hints.ExpirationDate.label}" id="c1" rendered="false">
+            <af:outputText value="#{row.ExpirationDate}"
+                           shortDesc="#{bindings.VOXXCustPoLines3.hints.ExpirationDate.tooltip}" id="ot1">
+              <af:convertDateTime pattern="#{bindings.VOXXCustPoLines3.hints.ExpirationDate.format}"/>
+            </af:outputText>
+          </af:column>
+          <af:column headerText="Item Code" id="c2" width="120">
+            <af:outputText value="#{row.ItemCode}" shortDesc="#{bindings.VOXXCustPoLines3.hints.ItemCode.tooltip}"
+                           id="ot2"/>
+          </af:column>
+          <af:column headerText="Item Description" id="c3" width="400">
+            <af:outputText value="#{row.ItemDescription}"
+                           shortDesc="#{bindings.VOXXCustPoLines3.hints.ItemDescription.tooltip}" id="ot3"/>
+          </af:column>
+          <af:column headerText="UOM" id="c11">
+            <af:outputText value="#{row.UnitMeasLookupCode}"
+                           shortDesc="#{bindings.VOXXCustPoLines3.hints.UnitMeasLookupCode.tooltip}" id="ot11"/>
+          </af:column>
+          <af:column headerText="#{bindings.VOXXCustPoLines3.hints.ItemId.label}" id="c4" rendered="false">
+            <af:outputText value="#{row.ItemId}" shortDesc="#{bindings.VOXXCustPoLines3.hints.ItemId.tooltip}" id="ot4">
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.VOXXCustPoLines3.hints.ItemId.format}"/>
+            </af:outputText>
+          </af:column>
+          <af:column headerText="#{bindings.VOXXCustPoLines3.hints.OrgId.label}" id="c6" rendered="false">
+            <af:outputText value="#{row.OrgId}" shortDesc="#{bindings.VOXXCustPoLines3.hints.OrgId.tooltip}" id="ot6">
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.VOXXCustPoLines3.hints.OrgId.format}"/>
+            </af:outputText>
+          </af:column>
+          <af:column headerText="#{bindings.VOXXCustPoLines3.hints.PoHeaderId.label}" id="c7" rendered="false">
+            <af:outputText value="#{row.PoHeaderId}" shortDesc="#{bindings.VOXXCustPoLines3.hints.PoHeaderId.tooltip}"
+                           id="ot7">
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.VOXXCustPoLines3.hints.PoHeaderId.format}"/>
+            </af:outputText>
+          </af:column>
+          <af:column headerText="Unit Price" id="c12">
+            <af:outputText value="#{row.UnitPrice}" shortDesc="#{bindings.VOXXCustPoLines3.hints.UnitPrice.tooltip}"
+                           id="ot12">
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.VOXXCustPoLines3.hints.UnitPrice.format}"/>
+            </af:outputText>
+          </af:column>
+          <af:column headerText="#{bindings.VOXXCustPoLines3.hints.Quantity.label}" id="c9">
+            <af:outputText value="#{row.Quantity}" shortDesc="#{bindings.VOXXCustPoLines3.hints.Quantity.tooltip}"
+                           id="ot9">
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.VOXXCustPoLines3.hints.Quantity.format}"/>
+            </af:outputText>
+          </af:column>
+          <af:column headerText="#{bindings.VOXXCustPoLines3.hints.StartDate.label}" id="c10" rendered="false">
+            <af:outputText value="#{row.StartDate}" shortDesc="#{bindings.VOXXCustPoLines3.hints.StartDate.tooltip}"
+                           id="ot10">
+              <af:convertDateTime pattern="#{bindings.VOXXCustPoLines3.hints.StartDate.format}"/>
+            </af:outputText>
+          </af:column>
+        </af:table>
+        <af:outputText value="#{bindings.Quantity.inputValue}" shortDesc="#{bindings.Quantity.hints.tooltip}" id="ot18"
+                       rendered="false">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.Quantity.format}"/>
+        </af:outputText>
+      </af:panelGroupLayout>
+    </af:panelGroupLayout>
+    <af:spacer width="10" height="5" id="s2"/>
+    <af:panelGroupLayout id="pgl5" layout="vertical" halign="left">
+      <af:toolbar id="t4">
+        <af:outputText value="Shipments" id="ot13" inlineStyle="color:black; font-size:x-large;"/>
+        <af:image source="#{resource['images:ship.png']}" id="i1"/>
+        <af:button id="b10"
+                   action="#{backingBeanScope.VendorPo.createShipmentPlanLine}"
+                   text="Create Shipment"/>
+        <af:button text="Generate Packing" id="b12" action="#{backingBeanScope.VendorPo.createPackingPlan}"
+                   disabled="#{bindings.Status1.inputValue == 'SHIPPED'}"/>
+        <af:button actionListener="#{bindings.Delete.execute}" text="Remove Current Packing"
+                   disabled="#{bindings.Status1.inputValue == 'SHIPPED'}" id="b8"/>
+        <af:button text="Save" id="b11" action="#{backingBeanScope.VendorPo.commitAction}"
+                   disabled="#{bindings.Status1.inputValue == 'SHIPPED'}"/>
+      </af:toolbar>
+      <af:panelSplitter id="ps1" splitterPosition="780" dimensionsFrom="children">
+        <f:facet name="first">
+          <af:table value="#{bindings.VOXXCustShipmentLines2.collectionModel}" var="row"
+                    rows="#{bindings.VOXXCustShipmentLines2.rangeSize}"
+                    emptyText="#{bindings.VOXXCustShipmentLines2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.VOXXCustShipmentLines2.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.VOXXCustShipmentLines2.collectionModel.makeCurrent}"
+                    rowSelection="single" fetchSize="#{bindings.VOXXCustShipmentLines2.rangeSize}" id="t2"
+                    autoHeightRows="3" contentDelivery="immediate" inlineStyle="width:inherit;" >
+            <af:column headerText="#{bindings.VOXXCustShipmentLines2.hints.ShipId.label}" id="c13" width="39">
+              <af:inputText value="#{row.bindings.ShipId.inputValue}"
+                            label="#{bindings.VOXXCustShipmentLines2.hints.ShipId.label}"
+                            required="#{bindings.VOXXCustShipmentLines2.hints.ShipId.mandatory}"
+                            columns="#{bindings.VOXXCustShipmentLines2.hints.ShipId.displayWidth}"
+                            maximumLength="#{bindings.VOXXCustShipmentLines2.hints.ShipId.precision}"
+                            shortDesc="#{bindings.VOXXCustShipmentLines2.hints.ShipId.tooltip}" id="it11"
+                            readOnly="true">
+                <f:validator binding="#{row.bindings.ShipId.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.VOXXCustShipmentLines2.hints.ShipId.format}"/>
+              </af:inputText>
+            </af:column>
+            <af:column headerText="Ship Line#" id="c14" width="50">
+              <af:inputText value="#{row.bindings.ShipLineNum.inputValue}"
+                            label="#{bindings.VOXXCustShipmentLines2.hints.ShipLineNum.label}"
+                            required="#{bindings.VOXXCustShipmentLines2.hints.ShipLineNum.mandatory}"
+                            columns="#{bindings.VOXXCustShipmentLines2.hints.ShipLineNum.displayWidth}"
+                            maximumLength="#{bindings.VOXXCustShipmentLines2.hints.ShipLineNum.precision}"
+                            shortDesc="#{bindings.VOXXCustShipmentLines2.hints.ShipLineNum.tooltip}" id="it12"
+                            readOnly="true">
+                <f:validator binding="#{row.bindings.ShipLineNum.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.VOXXCustShipmentLines2.hints.ShipLineNum.format}"/>
+              </af:inputText>
+            </af:column>
+            <af:column headerText="Ship#" id="c15" width="120">
+              <af:inputText value="#{row.bindings.ShipNo.inputValue}"
+                            label="#{bindings.VOXXCustShipmentLines2.hints.ShipNo.label}"
+                            required="#{bindings.VOXXCustShipmentLines2.hints.ShipNo.mandatory}"
+                            columns="#{bindings.VOXXCustShipmentLines2.hints.ShipNo.displayWidth}"
+                            maximumLength="#{bindings.VOXXCustShipmentLines2.hints.ShipNo.precision}"
+                            shortDesc="#{bindings.VOXXCustShipmentLines2.hints.ShipNo.tooltip}" id="it13"
+                            readOnly="true">
+                <f:validator binding="#{row.bindings.ShipNo.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column headerText="#{bindings.VOXXCustShipmentLines2.hints.PoLineId.label}" id="c16" rendered="false">
+              <af:inputText value="#{row.bindings.PoLineId.inputValue}"
+                            label="#{bindings.VOXXCustShipmentLines2.hints.PoLineId.label}"
+                            required="#{bindings.VOXXCustShipmentLines2.hints.PoLineId.mandatory}"
+                            columns="#{bindings.VOXXCustShipmentLines2.hints.PoLineId.displayWidth}"
+                            maximumLength="#{bindings.VOXXCustShipmentLines2.hints.PoLineId.precision}"
+                            shortDesc="#{bindings.VOXXCustShipmentLines2.hints.PoLineId.tooltip}" id="it14">
+                <f:validator binding="#{row.bindings.PoLineId.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.VOXXCustShipmentLines2.hints.PoLineId.format}"/>
+              </af:inputText>
+            </af:column>
+            <af:column headerText="Ship Quantity" id="c17" rendered="true"
+                       width="50">
+              <af:inputText value="#{row.bindings.ShipQty.inputValue}"
+                            label="#{bindings.VOXXCustShipmentLines2.hints.ShipQty.label}"
+                            required="#{bindings.VOXXCustShipmentLines2.hints.ShipQty.mandatory}"
+                            columns="#{bindings.VOXXCustShipmentLines2.hints.ShipQty.displayWidth}"
+                            maximumLength="#{bindings.VOXXCustShipmentLines2.hints.ShipQty.precision}"
+                            shortDesc="#{bindings.VOXXCustShipmentLines2.hints.ShipQty.tooltip}" id="it15"
+                            disabled="#{row.bindings.Status.inputValue eq 1 }">
+                <f:validator binding="#{row.bindings.ShipQty.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.VOXXCustShipmentLines2.hints.ShipQty.format}"/>
+              </af:inputText>
+              <f:facet name="footer">
+                <af:outputText value="#{bindings.TotalShipmentQty.inputValue}"
+                               shortDesc="#{bindings.TotalShipmentQty.hints.tooltip}" id="ot15"
+                               partialTriggers="::b11 ::b12">
+                  <af:convertNumber groupingUsed="false" pattern="#{bindings.TotalShipmentQty.format}"/>
+                </af:outputText>
+              </f:facet>
+            </af:column>
+            <af:column headerText="Packing Size" id="c18" width="50">
+              <af:inputText value="#{row.bindings.PackingSize.inputValue}"
+                            label="#{bindings.VOXXCustShipmentLines2.hints.PackingSize.label}"
+                            required="#{bindings.VOXXCustShipmentLines2.hints.PackingSize.mandatory}"
+                            columns="#{bindings.VOXXCustShipmentLines2.hints.PackingSize.displayWidth}"
+                            maximumLength="#{bindings.VOXXCustShipmentLines2.hints.PackingSize.precision}"
+                            shortDesc="#{bindings.VOXXCustShipmentLines2.hints.PackingSize.tooltip}" id="it16"
+                            disabled="#{row.bindings.Status.inputValue eq 1 }">
+                <f:validator binding="#{row.bindings.PackingSize.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.VOXXCustShipmentLines2.hints.PackingSize.format}"/>
+              </af:inputText>
+            </af:column>
+            <af:column headerText="Packing Divisor" id="c19" width="50">
+              <af:inputText value="#{row.bindings.PackingDivisor.inputValue}"
+                            label="#{bindings.VOXXCustShipmentLines2.hints.PackingDivisor.label}"
+                            required="#{bindings.VOXXCustShipmentLines2.hints.PackingDivisor.mandatory}"
+                            columns="#{bindings.VOXXCustShipmentLines2.hints.PackingDivisor.displayWidth}"
+                            maximumLength="#{bindings.VOXXCustShipmentLines2.hints.PackingDivisor.precision}"
+                            shortDesc="#{bindings.VOXXCustShipmentLines2.hints.PackingDivisor.tooltip}" id="it17"
+                            disabled="#{row.bindings.Status.inputValue == 1 }">
+                <f:validator binding="#{row.bindings.PackingDivisor.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.VOXXCustShipmentLines2.hints.PackingDivisor.format}"/>
+              </af:inputText>
+            </af:column>
+            <af:column headerText="Shipment Status" id="c20" width="100">
+              <af:selectOneChoice value="#{row.bindings.Status.inputValue}" label="#{row.bindings.Status.label}"
+                                  required="#{bindings.VOXXCustShipmentLines2.hints.Status.mandatory}"
+                                  shortDesc="#{bindings.VOXXCustShipmentLines2.hints.Status.tooltip}" id="soc1"
+                                  disabled="#{row.bindings.Status.inputValue == 1 }">
+                <f:selectItems value="#{row.bindings.Status.items}" id="si1"/>
+                <f:validator binding="#{row.bindings.Status.validator}"/>
+              </af:selectOneChoice>
+            </af:column>
+            <af:column headerText="Ship Date" id="c21" width="100">
+              <af:inputDate value="#{row.bindings.ShipDate.inputValue}"
+                            label="#{bindings.VOXXCustShipmentLines2.hints.ShipDate.label}"
+                            required="#{bindings.VOXXCustShipmentLines2.hints.ShipDate.mandatory}"
+                            columns="#{bindings.VOXXCustShipmentLines2.hints.ShipDate.displayWidth}"
+                            shortDesc="#{bindings.VOXXCustShipmentLines2.hints.ShipDate.tooltip}" id="id5">
+                <f:validator binding="#{row.bindings.ShipDate.validator}"/>
+                <af:convertDateTime pattern="#{bindings.VOXXCustShipmentLines2.hints.ShipDate.format}"/>
+              </af:inputDate>
+            </af:column>
+            <af:column headerText="#{bindings.VOXXCustShipmentLines2.hints.CreatedBy.label}" id="c22" rendered="false">
+              <af:inputText value="#{row.bindings.CreatedBy.inputValue}"
+                            label="#{bindings.VOXXCustShipmentLines2.hints.CreatedBy.label}"
+                            required="#{bindings.VOXXCustShipmentLines2.hints.CreatedBy.mandatory}"
+                            columns="#{bindings.VOXXCustShipmentLines2.hints.CreatedBy.displayWidth}"
+                            maximumLength="#{bindings.VOXXCustShipmentLines2.hints.CreatedBy.precision}"
+                            shortDesc="#{bindings.VOXXCustShipmentLines2.hints.CreatedBy.tooltip}" id="it18">
+                <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.VOXXCustShipmentLines2.hints.CreatedBy.format}"/>
+              </af:inputText>
+            </af:column>
+            <af:column headerText="#{bindings.VOXXCustShipmentLines2.hints.CreationDate.label}" id="c23"
+                       rendered="false">
+              <af:inputDate value="#{row.bindings.CreationDate.inputValue}"
+                            label="#{bindings.VOXXCustShipmentLines2.hints.CreationDate.label}"
+                            required="#{bindings.VOXXCustShipmentLines2.hints.CreationDate.mandatory}"
+                            columns="#{bindings.VOXXCustShipmentLines2.hints.CreationDate.displayWidth}"
+                            shortDesc="#{bindings.VOXXCustShipmentLines2.hints.CreationDate.tooltip}" id="id6">
+                <f:validator binding="#{row.bindings.CreationDate.validator}"/>
+                <af:convertDateTime pattern="#{bindings.VOXXCustShipmentLines2.hints.CreationDate.format}"/>
+              </af:inputDate>
+            </af:column>
+            <af:column headerText="#{bindings.VOXXCustShipmentLines2.hints.LastUpdatedBy.label}" id="c24"
+                       rendered="false">
+              <af:inputText value="#{row.bindings.LastUpdatedBy.inputValue}"
+                            label="#{bindings.VOXXCustShipmentLines2.hints.LastUpdatedBy.label}"
+                            required="#{bindings.VOXXCustShipmentLines2.hints.LastUpdatedBy.mandatory}"
+                            columns="#{bindings.VOXXCustShipmentLines2.hints.LastUpdatedBy.displayWidth}"
+                            maximumLength="#{bindings.VOXXCustShipmentLines2.hints.LastUpdatedBy.precision}"
+                            shortDesc="#{bindings.VOXXCustShipmentLines2.hints.LastUpdatedBy.tooltip}" id="it19">
+                <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.VOXXCustShipmentLines2.hints.LastUpdatedBy.format}"/>
+              </af:inputText>
+            </af:column>
+            <af:column headerText="#{bindings.VOXXCustShipmentLines2.hints.LastUpdateDate.label}" id="c25"
+                       rendered="false">
+              <af:inputDate value="#{row.bindings.LastUpdateDate.inputValue}"
+                            label="#{bindings.VOXXCustShipmentLines2.hints.LastUpdateDate.label}"
+                            required="#{bindings.VOXXCustShipmentLines2.hints.LastUpdateDate.mandatory}"
+                            columns="#{bindings.VOXXCustShipmentLines2.hints.LastUpdateDate.displayWidth}"
+                            shortDesc="#{bindings.VOXXCustShipmentLines2.hints.LastUpdateDate.tooltip}" id="id7">
+                <f:validator binding="#{row.bindings.LastUpdateDate.validator}"/>
+                <af:convertDateTime pattern="#{bindings.VOXXCustShipmentLines2.hints.LastUpdateDate.format}"/>
+              </af:inputDate>
+            </af:column>
+            <af:column headerText="#{bindings.VOXXCustShipmentLines2.hints.VersionNumber.label}" id="c43"
+                       rendered="false">
+              <af:inputText value="#{row.bindings.VersionNumber.inputValue}"
+                            label="#{bindings.VOXXCustShipmentLines2.hints.VersionNumber.label}"
+                            required="#{bindings.VOXXCustShipmentLines2.hints.VersionNumber.mandatory}"
+                            columns="#{bindings.VOXXCustShipmentLines2.hints.VersionNumber.displayWidth}"
+                            maximumLength="#{bindings.VOXXCustShipmentLines2.hints.VersionNumber.precision}"
+                            shortDesc="#{bindings.VOXXCustShipmentLines2.hints.VersionNumber.tooltip}" id="it20">
+                <f:validator binding="#{row.bindings.VersionNumber.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.VOXXCustShipmentLines2.hints.VersionNumber.format}"/>
+              </af:inputText>
+            </af:column>
+            <af:column headerText="#{bindings.VOXXCustShipmentLines2.hints.totalPackingQty.label}" id="c44"
+                       rendered="false">
+              <af:inputText value="#{row.bindings.totalPackingQty.inputValue}"
+                            label="#{bindings.VOXXCustShipmentLines2.hints.totalPackingQty.label}"
+                            required="#{bindings.VOXXCustShipmentLines2.hints.totalPackingQty.mandatory}"
+                            columns="#{bindings.VOXXCustShipmentLines2.hints.totalPackingQty.displayWidth}"
+                            maximumLength="#{bindings.VOXXCustShipmentLines2.hints.totalPackingQty.precision}"
+                            shortDesc="#{bindings.VOXXCustShipmentLines2.hints.totalPackingQty.tooltip}" id="it33">
+                <f:validator binding="#{row.bindings.totalPackingQty.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.VOXXCustShipmentLines2.hints.totalPackingQty.format}"/>
+              </af:inputText>
+            </af:column>
+          </af:table>
+        </f:facet>
+        <f:facet name="second">
+          <af:panelGroupLayout id="pgl2" layout="vertical">
+            <af:table value="#{bindings.VOXXCustShipmentPacking2.collectionModel}" var="row"
+                      rows="#{bindings.VOXXCustShipmentPacking2.rangeSize}"
+                      emptyText="#{bindings.VOXXCustShipmentPacking2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.VOXXCustShipmentPacking2.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.VOXXCustShipmentPacking2.collectionModel.makeCurrent}"
+                      rowSelection="single" fetchSize="#{bindings.VOXXCustShipmentPacking2.rangeSize}"
+                      filterModel="#{bindings.VOXXCustShipmentPacking2Query.queryDescriptor}" filterVisible="true"
+                      queryListener="#{bindings.VOXXCustShipmentPacking2Query.processQuery}" varStatus="vs" id="t3"
+                      partialTriggers="::b12 ::b8" autoHeightRows="3" inlineStyle="width:inherit;">
+              <af:column sortProperty="#{bindings.VOXXCustShipmentPacking2.hints.PackingId.name}" filterable="false"
+                         sortable="true" headerText="#{bindings.VOXXCustShipmentPacking2.hints.PackingId.label}"
+                         id="c26" rendered="true">
+                <af:inputText value="#{row.bindings.PackingId.inputValue}"
+                              label="#{bindings.VOXXCustShipmentPacking2.hints.PackingId.label}"
+                              required="#{bindings.VOXXCustShipmentPacking2.hints.PackingId.mandatory}"
+                              columns="#{bindings.VOXXCustShipmentPacking2.hints.PackingId.displayWidth}"
+                              maximumLength="#{bindings.VOXXCustShipmentPacking2.hints.PackingId.precision}"
+                              shortDesc="#{bindings.VOXXCustShipmentPacking2.hints.PackingId.tooltip}" id="it21"
+                              readOnly="true">
+                  <f:validator binding="#{row.bindings.PackingId.validator}"/>
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.VOXXCustShipmentPacking2.hints.PackingId.format}"/>
+                </af:inputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.VOXXCustShipmentPacking2.hints.ShipId.name}" filterable="false"
+                         sortable="true" headerText="#{bindings.VOXXCustShipmentPacking2.hints.ShipId.label}" id="c27"
+                         rendered="false">
+                <af:inputText value="#{row.bindings.ShipId.inputValue}"
+                              label="#{bindings.VOXXCustShipmentPacking2.hints.ShipId.label}"
+                              required="#{bindings.VOXXCustShipmentPacking2.hints.ShipId.mandatory}"
+                              columns="#{bindings.VOXXCustShipmentPacking2.hints.ShipId.displayWidth}"
+                              maximumLength="#{bindings.VOXXCustShipmentPacking2.hints.ShipId.precision}"
+                              shortDesc="#{bindings.VOXXCustShipmentPacking2.hints.ShipId.tooltip}" id="it22">
+                  <f:validator binding="#{row.bindings.ShipId.validator}"/>
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.VOXXCustShipmentPacking2.hints.ShipId.format}"/>
+                </af:inputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.VOXXCustShipmentPacking2.hints.PackingLineNum.name}"
+                         filterable="false" sortable="true"
+                         headerText="#{bindings.VOXXCustShipmentPacking2.hints.PackingLineNum.label}" id="c28">
+                <af:inputText value="#{row.bindings.PackingLineNum.inputValue}"
+                              label="#{bindings.VOXXCustShipmentPacking2.hints.PackingLineNum.label}"
+                              required="#{bindings.VOXXCustShipmentPacking2.hints.PackingLineNum.mandatory}"
+                              columns="#{bindings.VOXXCustShipmentPacking2.hints.PackingLineNum.displayWidth}"
+                              maximumLength="#{bindings.VOXXCustShipmentPacking2.hints.PackingLineNum.precision}"
+                              shortDesc="#{bindings.VOXXCustShipmentPacking2.hints.PackingLineNum.tooltip}" id="it23"
+                              readOnly="true">
+                  <f:validator binding="#{row.bindings.PackingLineNum.validator}"/>
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.VOXXCustShipmentPacking2.hints.PackingLineNum.format}"/>
+                </af:inputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.VOXXCustShipmentPacking2.hints.PackingQty.name}" filterable="false"
+                         sortable="true" headerText="#{bindings.VOXXCustShipmentPacking2.hints.PackingQty.label}"
+                         id="c29">
+                <af:inputText value="#{row.bindings.PackingQty.inputValue}"
+                              label="#{bindings.VOXXCustShipmentPacking2.hints.PackingQty.label}"
+                              required="#{bindings.VOXXCustShipmentPacking2.hints.PackingQty.mandatory}"
+                              columns="#{bindings.VOXXCustShipmentPacking2.hints.PackingQty.displayWidth}"
+                              maximumLength="#{bindings.VOXXCustShipmentPacking2.hints.PackingQty.precision}"
+                              shortDesc="#{bindings.VOXXCustShipmentPacking2.hints.PackingQty.tooltip}" id="it24"
+                              disabled="#{bindings.PackingSize.inputValue > 0 }">
+                  <f:validator binding="#{row.bindings.PackingQty.validator}"/>
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.VOXXCustShipmentPacking2.hints.PackingQty.format}"/>
+                </af:inputText>
+                <f:facet name="footer">
+                  <af:outputText value="#{bindings.totalPackingQty.inputValue}"
+                                 shortDesc="#{bindings.totalPackingQty.hints.tooltip}" id="ot14"
+                                 partialTriggers="::b11 ::b12">
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.totalPackingQty.format}"/>
+                  </af:outputText>
+                </f:facet>
+              </af:column>
+              <af:column sortProperty="#{bindings.VOXXCustShipmentPacking2.hints.PackingDate.name}" filterable="false"
+                         sortable="true" headerText="#{bindings.VOXXCustShipmentPacking2.hints.PackingDate.label}"
+                         id="c30">
+                <f:facet name="filter">
+                  <af:inputDate value="#{bindings.VOXXCustShipmentPacking2Query.queryDescriptor.filterConjunctionCriterion.criterionMap.PackingDate.value}"
+                                id="id8">
+                    <af:convertDateTime pattern="#{bindings.VOXXCustShipmentPacking2.hints.PackingDate.format}"/>
+                  </af:inputDate>
+                </f:facet>
+                <af:inputDate value="#{row.bindings.PackingDate.inputValue}"
+                              label="#{bindings.VOXXCustShipmentPacking2.hints.PackingDate.label}"
+                              required="#{bindings.VOXXCustShipmentPacking2.hints.PackingDate.mandatory}"
+                              columns="#{bindings.VOXXCustShipmentPacking2.hints.PackingDate.displayWidth}"
+                              shortDesc="#{bindings.VOXXCustShipmentPacking2.hints.PackingDate.tooltip}" id="id9">
+                  <f:validator binding="#{row.bindings.PackingDate.validator}"/>
+                  <af:convertDateTime pattern="#{bindings.VOXXCustShipmentPacking2.hints.PackingDate.format}"/>
+                </af:inputDate>
+              </af:column>
+              <af:column sortProperty="#{bindings.VOXXCustShipmentPacking2.hints.Status.name}" filterable="false"
+                         sortable="true" headerText="#{bindings.VOXXCustShipmentPacking2.hints.Status.label}" id="c31">
+                <af:inputText value="#{row.bindings.Status.inputValue}"
+                              label="#{bindings.VOXXCustShipmentPacking2.hints.Status.label}"
+                              required="#{bindings.VOXXCustShipmentPacking2.hints.Status.mandatory}"
+                              columns="#{bindings.VOXXCustShipmentPacking2.hints.Status.displayWidth}"
+                              maximumLength="#{bindings.VOXXCustShipmentPacking2.hints.Status.precision}"
+                              shortDesc="#{bindings.VOXXCustShipmentPacking2.hints.Status.tooltip}" id="it25">
+                  <f:validator binding="#{row.bindings.Status.validator}"/>
+                </af:inputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.VOXXCustShipmentPacking2.hints.CreatedBy.name}" filterable="false"
+                         sortable="true" headerText="#{bindings.VOXXCustShipmentPacking2.hints.CreatedBy.label}"
+                         id="c32" rendered="false">
+                <af:inputText value="#{row.bindings.CreatedBy.inputValue}"
+                              label="#{bindings.VOXXCustShipmentPacking2.hints.CreatedBy.label}"
+                              required="#{bindings.VOXXCustShipmentPacking2.hints.CreatedBy.mandatory}"
+                              columns="#{bindings.VOXXCustShipmentPacking2.hints.CreatedBy.displayWidth}"
+                              maximumLength="#{bindings.VOXXCustShipmentPacking2.hints.CreatedBy.precision}"
+                              shortDesc="#{bindings.VOXXCustShipmentPacking2.hints.CreatedBy.tooltip}" id="it26">
+                  <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.VOXXCustShipmentPacking2.hints.CreatedBy.format}"/>
+                </af:inputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.VOXXCustShipmentPacking2.hints.CreationDate.name}" filterable="false"
+                         sortable="true" headerText="#{bindings.VOXXCustShipmentPacking2.hints.CreationDate.label}"
+                         id="c33" rendered="false">
+                <f:facet name="filter">
+                  <af:inputDate value="#{bindings.VOXXCustShipmentPacking2Query.queryDescriptor.filterConjunctionCriterion.criterionMap.CreationDate.value}"
+                                id="id10">
+                    <af:convertDateTime pattern="#{bindings.VOXXCustShipmentPacking2.hints.CreationDate.format}"/>
+                  </af:inputDate>
+                </f:facet>
+                <af:inputDate value="#{row.bindings.CreationDate.inputValue}"
+                              label="#{bindings.VOXXCustShipmentPacking2.hints.CreationDate.label}"
+                              required="#{bindings.VOXXCustShipmentPacking2.hints.CreationDate.mandatory}"
+                              columns="#{bindings.VOXXCustShipmentPacking2.hints.CreationDate.displayWidth}"
+                              shortDesc="#{bindings.VOXXCustShipmentPacking2.hints.CreationDate.tooltip}" id="id11">
+                  <f:validator binding="#{row.bindings.CreationDate.validator}"/>
+                  <af:convertDateTime pattern="#{bindings.VOXXCustShipmentPacking2.hints.CreationDate.format}"/>
+                </af:inputDate>
+              </af:column>
+              <af:column sortProperty="#{bindings.VOXXCustShipmentPacking2.hints.LastUpdatedBy.name}" filterable="false"
+                         sortable="true" headerText="#{bindings.VOXXCustShipmentPacking2.hints.LastUpdatedBy.label}"
+                         id="c34" rendered="false">
+                <af:inputText value="#{row.bindings.LastUpdatedBy.inputValue}"
+                              label="#{bindings.VOXXCustShipmentPacking2.hints.LastUpdatedBy.label}"
+                              required="#{bindings.VOXXCustShipmentPacking2.hints.LastUpdatedBy.mandatory}"
+                              columns="#{bindings.VOXXCustShipmentPacking2.hints.LastUpdatedBy.displayWidth}"
+                              maximumLength="#{bindings.VOXXCustShipmentPacking2.hints.LastUpdatedBy.precision}"
+                              shortDesc="#{bindings.VOXXCustShipmentPacking2.hints.LastUpdatedBy.tooltip}" id="it27">
+                  <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.VOXXCustShipmentPacking2.hints.LastUpdatedBy.format}"/>
+                </af:inputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.VOXXCustShipmentPacking2.hints.LastUpdateDate.name}"
+                         filterable="false" sortable="true"
+                         headerText="#{bindings.VOXXCustShipmentPacking2.hints.LastUpdateDate.label}" id="c35"
+                         rendered="false">
+                <f:facet name="filter">
+                  <af:inputDate value="#{bindings.VOXXCustShipmentPacking2Query.queryDescriptor.filterConjunctionCriterion.criterionMap.LastUpdateDate.value}"
+                                id="id12">
+                    <af:convertDateTime pattern="#{bindings.VOXXCustShipmentPacking2.hints.LastUpdateDate.format}"/>
+                  </af:inputDate>
+                </f:facet>
+                <af:inputDate value="#{row.bindings.LastUpdateDate.inputValue}"
+                              label="#{bindings.VOXXCustShipmentPacking2.hints.LastUpdateDate.label}"
+                              required="#{bindings.VOXXCustShipmentPacking2.hints.LastUpdateDate.mandatory}"
+                              columns="#{bindings.VOXXCustShipmentPacking2.hints.LastUpdateDate.displayWidth}"
+                              shortDesc="#{bindings.VOXXCustShipmentPacking2.hints.LastUpdateDate.tooltip}" id="id13">
+                  <f:validator binding="#{row.bindings.LastUpdateDate.validator}"/>
+                  <af:convertDateTime pattern="#{bindings.VOXXCustShipmentPacking2.hints.LastUpdateDate.format}"/>
+                </af:inputDate>
+              </af:column>
+              <af:column sortProperty="#{bindings.VOXXCustShipmentPacking2.hints.ScanDate.name}" filterable="false"
+                         sortable="true" headerText="#{bindings.VOXXCustShipmentPacking2.hints.ScanDate.label}" id="c36"
+                         rendered="false">
+                <f:facet name="filter">
+                  <af:inputDate value="#{bindings.VOXXCustShipmentPacking2Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ScanDate.value}"
+                                id="id14">
+                    <af:convertDateTime pattern="#{bindings.VOXXCustShipmentPacking2.hints.ScanDate.format}"/>
+                  </af:inputDate>
+                </f:facet>
+                <af:inputDate value="#{row.bindings.ScanDate.inputValue}"
+                              label="#{bindings.VOXXCustShipmentPacking2.hints.ScanDate.label}"
+                              required="#{bindings.VOXXCustShipmentPacking2.hints.ScanDate.mandatory}"
+                              columns="#{bindings.VOXXCustShipmentPacking2.hints.ScanDate.displayWidth}"
+                              shortDesc="#{bindings.VOXXCustShipmentPacking2.hints.ScanDate.tooltip}" id="id15">
+                  <f:validator binding="#{row.bindings.ScanDate.validator}"/>
+                  <af:convertDateTime pattern="#{bindings.VOXXCustShipmentPacking2.hints.ScanDate.format}"/>
+                </af:inputDate>
+              </af:column>
+              <af:column sortProperty="#{bindings.VOXXCustShipmentPacking2.hints.ScanLineId.name}" filterable="false"
+                         sortable="true" headerText="#{bindings.VOXXCustShipmentPacking2.hints.ScanLineId.label}"
+                         id="c37" rendered="false">
+                <af:inputText value="#{row.bindings.ScanLineId.inputValue}"
+                              label="#{bindings.VOXXCustShipmentPacking2.hints.ScanLineId.label}"
+                              required="#{bindings.VOXXCustShipmentPacking2.hints.ScanLineId.mandatory}"
+                              columns="#{bindings.VOXXCustShipmentPacking2.hints.ScanLineId.displayWidth}"
+                              maximumLength="#{bindings.VOXXCustShipmentPacking2.hints.ScanLineId.precision}"
+                              shortDesc="#{bindings.VOXXCustShipmentPacking2.hints.ScanLineId.tooltip}" id="it28">
+                  <f:validator binding="#{row.bindings.ScanLineId.validator}"/>
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.VOXXCustShipmentPacking2.hints.ScanLineId.format}"/>
+                </af:inputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.VOXXCustShipmentPacking2.hints.ScanBy.name}" filterable="false"
+                         sortable="true" headerText="#{bindings.VOXXCustShipmentPacking2.hints.ScanBy.label}" id="c38"
+                         rendered="false">
+                <af:inputText value="#{row.bindings.ScanBy.inputValue}"
+                              label="#{bindings.VOXXCustShipmentPacking2.hints.ScanBy.label}"
+                              required="#{bindings.VOXXCustShipmentPacking2.hints.ScanBy.mandatory}"
+                              columns="#{bindings.VOXXCustShipmentPacking2.hints.ScanBy.displayWidth}"
+                              maximumLength="#{bindings.VOXXCustShipmentPacking2.hints.ScanBy.precision}"
+                              shortDesc="#{bindings.VOXXCustShipmentPacking2.hints.ScanBy.tooltip}" id="it29">
+                  <f:validator binding="#{row.bindings.ScanBy.validator}"/>
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.VOXXCustShipmentPacking2.hints.ScanBy.format}"/>
+                </af:inputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.VOXXCustShipmentPacking2.hints.RejectDate.name}" filterable="false"
+                         sortable="true" headerText="#{bindings.VOXXCustShipmentPacking2.hints.RejectDate.label}"
+                         id="c39" rendered="false">
+                <f:facet name="filter">
+                  <af:inputDate value="#{bindings.VOXXCustShipmentPacking2Query.queryDescriptor.filterConjunctionCriterion.criterionMap.RejectDate.value}"
+                                id="id16">
+                    <af:convertDateTime pattern="#{bindings.VOXXCustShipmentPacking2.hints.RejectDate.format}"/>
+                  </af:inputDate>
+                </f:facet>
+                <af:inputDate value="#{row.bindings.RejectDate.inputValue}"
+                              label="#{bindings.VOXXCustShipmentPacking2.hints.RejectDate.label}"
+                              required="#{bindings.VOXXCustShipmentPacking2.hints.RejectDate.mandatory}"
+                              columns="#{bindings.VOXXCustShipmentPacking2.hints.RejectDate.displayWidth}"
+                              shortDesc="#{bindings.VOXXCustShipmentPacking2.hints.RejectDate.tooltip}" id="id17">
+                  <f:validator binding="#{row.bindings.RejectDate.validator}"/>
+                  <af:convertDateTime pattern="#{bindings.VOXXCustShipmentPacking2.hints.RejectDate.format}"/>
+                </af:inputDate>
+              </af:column>
+              <af:column sortProperty="#{bindings.VOXXCustShipmentPacking2.hints.RejectBy.name}" filterable="false"
+                         sortable="true" headerText="#{bindings.VOXXCustShipmentPacking2.hints.RejectBy.label}" id="c40"
+                         rendered="false">
+                <af:inputText value="#{row.bindings.RejectBy.inputValue}"
+                              label="#{bindings.VOXXCustShipmentPacking2.hints.RejectBy.label}"
+                              required="#{bindings.VOXXCustShipmentPacking2.hints.RejectBy.mandatory}"
+                              columns="#{bindings.VOXXCustShipmentPacking2.hints.RejectBy.displayWidth}"
+                              maximumLength="#{bindings.VOXXCustShipmentPacking2.hints.RejectBy.precision}"
+                              shortDesc="#{bindings.VOXXCustShipmentPacking2.hints.RejectBy.tooltip}" id="it30">
+                  <f:validator binding="#{row.bindings.RejectBy.validator}"/>
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.VOXXCustShipmentPacking2.hints.RejectBy.format}"/>
+                </af:inputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.VOXXCustShipmentPacking2.hints.RejectLineId.name}" filterable="false"
+                         sortable="true" headerText="#{bindings.VOXXCustShipmentPacking2.hints.RejectLineId.label}"
+                         id="c41" rendered="false">
+                <af:inputText value="#{row.bindings.RejectLineId.inputValue}"
+                              label="#{bindings.VOXXCustShipmentPacking2.hints.RejectLineId.label}"
+                              required="#{bindings.VOXXCustShipmentPacking2.hints.RejectLineId.mandatory}"
+                              columns="#{bindings.VOXXCustShipmentPacking2.hints.RejectLineId.displayWidth}"
+                              maximumLength="#{bindings.VOXXCustShipmentPacking2.hints.RejectLineId.precision}"
+                              shortDesc="#{bindings.VOXXCustShipmentPacking2.hints.RejectLineId.tooltip}" id="it31">
+                  <f:validator binding="#{row.bindings.RejectLineId.validator}"/>
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.VOXXCustShipmentPacking2.hints.RejectLineId.format}"/>
+                </af:inputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.VOXXCustShipmentPacking2.hints.OrgId.name}" filterable="false"
+                         sortable="true" headerText="#{bindings.VOXXCustShipmentPacking2.hints.OrgId.label}" id="c42"
+                         rendered="false">
+                <af:inputText value="#{row.bindings.OrgId.inputValue}"
+                              label="#{bindings.VOXXCustShipmentPacking2.hints.OrgId.label}"
+                              required="#{bindings.VOXXCustShipmentPacking2.hints.OrgId.mandatory}"
+                              columns="#{bindings.VOXXCustShipmentPacking2.hints.OrgId.displayWidth}"
+                              maximumLength="#{bindings.VOXXCustShipmentPacking2.hints.OrgId.precision}"
+                              shortDesc="#{bindings.VOXXCustShipmentPacking2.hints.OrgId.tooltip}" id="it32">
+                  <f:validator binding="#{row.bindings.OrgId.validator}"/>
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.VOXXCustShipmentPacking2.hints.OrgId.format}"/>
+                </af:inputText>
+              </af:column>
+              <f:facet name="header"/>
+            </af:table>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:panelSplitter>
+    </af:panelGroupLayout>
+    <af:outputText value="#{bindings.PackingSize.inputValue}" id="ot17"/>
+        
+  </af:panelGroupLayout>
+  <!--oracle-jdev-comment:preferred-managed-bean-name:VendorPo-->
+</ui:composition>

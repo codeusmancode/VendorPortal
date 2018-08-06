@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24"
+                id="tf_vendorpo_tf_vendorpo_ExecuteWithParamsPageDef" Package="com.usaparel.vpview.pageDefs"
+                SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="VOXXCustPoHeader1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="VOXXCustPoHeader1Iterator" Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="VOXXCustPoHeader1Iterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="vendor_id" NDValue="#{sessionScope.userid}" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>
